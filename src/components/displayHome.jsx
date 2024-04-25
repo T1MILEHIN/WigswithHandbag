@@ -56,7 +56,6 @@ export default function DisplayHome() {
     return (
         <Parallax
             translateY={["0px", "200px"]}
-            scale={[1, 1.5]}
             speed={12}
             easing="easeInQuad"
             className='overflow-hidden'>

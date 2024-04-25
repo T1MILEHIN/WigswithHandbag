@@ -32,7 +32,7 @@ const Landing = () => {
         <section className="flex items-center md:flex-row flex-col justify-center gap-16 min-h-screen py-32 md:py-10 md:my-10">
           <div className={`md:px-0 px-4 w-fit mx-auto md:text-center text-left ${poppins.className}`}>
             <h1 className="font-bold text-3xl md:text-4xl">Create Your Own Unique Sense of Style</h1>
-            <p className="text-lg md:text-2xl my-4">The ultimate feel and loog Good store</p>
+            <p className="text-lg md:text-2xl my-4">The ultimate feel and look Good store</p>
             <div className="text-base md:text-xl flex items-center gap-3 md:gap-4 font-bold w-fit md:mx-auto">
               <button className="md:px-5 px-2 py-3 md:py-4 text-black bg-white">SHOP NOW</button>
               <button className="md:px-5 px-2 py-3 md:py-4 bg-transparent text-white border-2 border-white">BOOK APPOINTMENT</button>
