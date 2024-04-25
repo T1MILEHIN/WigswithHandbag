@@ -45,7 +45,7 @@ const LandingParallax = () => {
         easing="easeInQuad"
         className='overflow-hidden'
       >
-        <motion.section ref={ref} variants={landingContainer} initial="initial" animate={isInView ? "animate" : "initial"} className="flex flex-wrap md:flex-row flex-col gap-10 items-center justify-between overflow-hidden  md:px-20 px-4 ">
+        <motion.section ref={ref} variants={landingContainer} initial="initial" animate={isInView ? "animate" : "initial"} className="flex flex-wrap md:flex-row flex-col gap-10 items-center justify-between overflow-hidden py-8 md:px-20 px-4 ">
           <motion.div variants={landingContainerChildren} className="origin-botton flex justify-center items-center flex-1  w-full aspect-square bg-[#E04E68]">
             <Image src={Image_one} width={1000} height={1000} alt='image-one' />
           </motion.div>

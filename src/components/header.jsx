@@ -95,7 +95,7 @@ const Header = () => {
     }
     return (
         <header className="lg:px-20 px-4 bg-white fixed w-full left-0 top-0 flex items-center justify-between z-[9999]">
-            <div className="lg:block hidden"><Link href="/"><Image src={LOGO} width={80} height={80} style={{width: "auto"}} alt="LOGO" /></Link></div>
+            <div className="lg:block hidden"><Link href="/"><Image src={LOGO} width={60} height={60} style={{width: "auto"}} alt="LOGO" /></Link></div>
             <div className="lg:hidden block"><Link href="/"><Image src={LOGO} width={40} height={40} style={{width: "auto"}} alt="LOGO" /></Link></div>
             <nav className="lg:block hidden">
                 <Links />

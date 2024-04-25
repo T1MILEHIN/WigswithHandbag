@@ -4,6 +4,7 @@ import landing1 from "../../src/app/images/landing1.jpg"
 import landing2 from "../../src/app/images/landing2.jpg"
 import landing3 from "../../src/app/images/landing3.jpg"
 import { motion } from "framer-motion";
+import { Parallax } from 'react-scroll-parallax'
 
 const containerVariant = {
     initial : {
@@ -53,16 +54,24 @@ const imageVariant3 = {
 
 export default function DisplayHome() {
     return (
-      <motion.div variants={containerVariant} initial="initial" animate="animate" className="bg-image">
-        <motion.div variants={imageVariant1} className="lg:block hidden">
-          <Image src={landing1} width={300} height={300} alt="landing-img" className="object-cover" />
-        </motion.div>
-        <motion.div variants={imageVariant2} className="">
-          <Image src={landing2} width={300} height={300} alt="landing-img" className="object-cover" />
-        </motion.div>
-        <motion.div variants={imageVariant3} className="lg:block hidden">
-          <Image src={landing3} width={400} height={400} alt="landing-img" className="object-cover" />
-        </motion.div>
-      </motion.div>
+        <Parallax
+            translateY={["0px", "200px"]}
+            scale={[1, 1.5]}
+            speed={12}
+            easing="easeInQuad"
+            className='overflow-hidden'>
+            <motion.div variants={containerVariant} initial="initial" animate="animate" className="overflow-hidden bg-image">
+                <motion.div variants={imageVariant1} className="lg:block hidden">
+                    <Image src={landing1} width={300} height={300} alt="landing-img" className="object-cover" />
+                </motion.div>
+                <motion.div variants={imageVariant2} className="">
+                    <Image src={landing2} width={300} height={300} alt="landing-img" className="object-cover" />
+                </motion.div>
+                <motion.div variants={imageVariant3} className="lg:block hidden">
+                    <Image src={landing3} width={400} height={400} alt="landing-img" className="object-cover" />
+                </motion.div>
+            </motion.div>
+        </Parallax>
+      
     )
   }
