@@ -13,17 +13,6 @@ export const AuthProvider = ({children}) => {
     const [userToken, setUserToken] = useState(null);
     const [loading, setLoading] = useState(false);
 
-  // Access localStorage after component mounts
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const storedToken = localStorage.getItem("token");
-
-    if (storedUser && storedToken) {
-      setUser(JSON.parse(storedUser));
-      setUserToken(JSON.parse(storedToken));
-    }
-  }, []);
-
     const googlePopUp = async()=> {
         const provider = new GoogleAuthProvider()
         try {
@@ -39,6 +28,16 @@ export const AuthProvider = ({children}) => {
             console.log(error)
         }
     }
+    // Access localStorage after component mounts
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        const storedToken = localStorage.getItem("token");
+
+        if (storedUser && storedToken) {
+        setUser(JSON.parse(storedUser));
+        setUserToken(JSON.parse(storedToken));
+        }
+    }, [user, userToken]);
     const logOut = ()=> {
         setLoading(true)
         try {

@@ -78,11 +78,11 @@ const Header = () => {
     const router = useRouter()
     const openSubNav = () => {
         setSubNav(prev => !prev)
-        setSubNav2(prev => !prev)
+        setSubNav2(false)
     }
     const openSubNav2 = () => {
         setSubNav2(prev => !prev)
-        setSubNav(prev => !prev)
+        setSubNav(false)
     }
     const profile = ()=> {
         if (!user)
@@ -102,39 +102,37 @@ const Header = () => {
             </nav>
             <div className="md:flex hidden items-center gap-4 md:gap-10">
                 <div className="relative">
-                    <input className="pl-10 border-2 border-black h-9 md:h-12" type="text" name="" id="" placeholder="Search" />
+                    <input className="pl-10 border-2 border-black h-9 md:h-12" type="text" placeholder="Search" />
                     <IoMdSearch className="absolute left-5 top-1/2 -translate-y-1/2" size={20} />
                 </div>
+                <Drawer>
+                    <DrawerTrigger>
+                        <MdOutlineShoppingBag size={20} />
+                    </DrawerTrigger>
+                    <DrawerContent>
+                        <DrawerHeader>
+                            <div className="mx-auto text-center">
+                                <DrawerTitle>No Item in Your Cart Now!!</DrawerTitle>
+                                <DrawerDescription>Would you like to go through our products?.</DrawerDescription>
+                            </div>
+                        </DrawerHeader>
+                        <DrawerFooter className="mx-auto">
+                            <Button className="">Yes</Button>
+                            <DrawerClose>
+                                <Button variant="outline" className="" >Cancel</Button>
+                            </DrawerClose>
+                        </DrawerFooter>
+                    </DrawerContent>
+                </Drawer>
                 <div>
-                    <Drawer>
-                        <DrawerTrigger>
-                            <MdOutlineShoppingBag size={20} />
-                        </DrawerTrigger>
-                        <DrawerContent>
-                            <DrawerHeader>
-                                <div className="mx-auto text-center">
-                                    <DrawerTitle>No Item in Your Cart Now!!</DrawerTitle>
-                                    <DrawerDescription>Would you like to go through our products?.</DrawerDescription>
-                                </div>
-                            </DrawerHeader>
-                            <DrawerFooter className="mx-auto">
-                                <Button className="">Yes</Button>
-                                <DrawerClose>
-                                    <Button variant="outline" className="" >Cancel</Button>
-                                </DrawerClose>
-                            </DrawerFooter>
-                        </DrawerContent>
-                    </Drawer>
-                </div>
-                <div>
-                    <FaUser className="cursor-pointer" onClick={profile} size={20} />
+                    <FaUser className="cursor-pointer" onClick={()=>profile()} size={20} />
                 </div>
                 {user && <button onClick={logOut} className="lg:block hidden w-full rounded-sm border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-black py-2 px-2 font-semibold text-white text-base md:text-base">LOGOUT</button>}
             </div>
             <motion.div className={`${nav ? "static" : "relative"} cursor-pointer bg-black p-2 rounded-md lg:hidden block`}>
                 <AnimatePresence>
                     {nav ?
-                        <div className="z-[9999999] text-xl md:text-2xl relative border-2 border-white" onClick={() => setNav(prev => !prev)}>
+                        <div className="z-[9999999] text-xl md:text-2xl relative border-2 border-black" onClick={() => setNav(prev => !prev)}>
                             <FaXmark color="white" size={20} />
                         </div>
                         :
@@ -145,7 +143,6 @@ const Header = () => {
                 </AnimatePresence>
                 <motion.div variants={divVariant} initial="initial" animate={nav ? "final" : "initial"} className={`fixed ${nav ? "" : ""} inset-0 bg-black text-white origin-top-right duration-300`}>
                         <motion.ul variants={ulVariant} className="font-bold md:font-semibold p-4 md:text-xl min-h-screen flex flex-col justify-between">
-                        {/* <AnimatePresence> */}
                             <motion.li onClick={() => openSubNav()} variants={liVariant}><span className="relative px-3 flex items-center gap-1">Shop<FaChevronDown /></span>
                                    { subNav &&
                                     <motion.ul initial={{height: 0, opacity: 0}} animate={{height: "100%", opacity: 1}} exit={{x: "100px", opacity: 0}} className={`z-10 absolute top-10 right-20 flex flex-col gap-5 py-2 px-4 transition-all duration-300 overflow-hidden`}>
@@ -185,7 +182,6 @@ const Header = () => {
                                     </Link>
                                 </>
                             )}
-                        {/* </AnimatePresence> */}
                         </motion.ul>
                 </motion.div>
             </motion.div>
