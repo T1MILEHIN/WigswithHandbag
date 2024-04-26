@@ -75,6 +75,10 @@ const Page = () => {
   }, [imageFile])
 
   const postWigs = async()=> {
+    if (!data.name.trim() || !data.image.trim() || !data.discount.trim() || !data.price.trim()) {
+      toast.error("Can't leave fields Empty")
+      return;
+  }
     try {
       const response = await addDoc(collection(db,"wigs"), {...data, timeStamp: serverTimestamp()});
       console.log(response)
@@ -111,7 +115,7 @@ const Page = () => {
   return (
     <div className="">
       <h1 className="my-2 text-center font-bold text-xl md:text-3xl text-[#7F6000]">Wigs</h1>
-      <div className="flex flex-col gap-3 my-4">
+      <div className="flex flex-col gap-5 my-4">
         <div className="flex items-center gap-2">
           <Image src={imageFile ? URL?.createObjectURL(imageFile) : upload} width={100} height={100} alt="preview" className="w-24 aspect-square rounded-sm object-cover" />
           <input onChange={(e)=> setImageFile(e.target.files[0])} name="image" className="pl-5 h-8 md:h-10" type="file" placeholder="" />
