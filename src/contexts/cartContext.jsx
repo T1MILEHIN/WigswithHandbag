@@ -11,8 +11,7 @@ export const CartProvider = ({children}) => {
         }
     });
     const addToCart = (data) => {
-            toast.success(`Successfully added to cart`);
-        }
+        toast.success(`Successfully added to cart`);
     }
 
     useEffect(() => {
@@ -21,7 +20,7 @@ export const CartProvider = ({children}) => {
     }, [])
 
     return (
-        <CartContext.Provider value={{cartItem, addCartItem}}>
+        <CartContext.Provider value={{cartItem, addToCart}}>
             <Toaster position="top-center" />
             <div className="relative">
                 <>
