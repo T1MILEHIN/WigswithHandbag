@@ -130,7 +130,12 @@ const Page = () => {
                 {!allBundles ? <h1 className='col-span-1 md:col-span-3 text-center'>No Available Bundle Right Now. Check Back Later</h1> : (
                     allBundles.map((bundle, index)=> (
                         <div key={index} className="">
-                             <LazyLoadImage effect="blur" placeholder={<Loading />} src={bundle.image} alt={bundle.name} className="w-full"/>
+                            <div className="relative group">
+                                <LazyLoadImage effect="blur" placeholder={<Loading />} src={bundle.image} alt={bundle.name} className="w-full"/>
+                                <div className="absolute top-0 bottom-2 left-0 right-0 bg-black bg-opacity-60 invisible opacity-0 group-hover:visible group-hover:opacity-100 duration-300 flex justify-center items-center">
+                                    <motion.button whileTap={{scale: 0.8}} className="shadow-lg bg-white text-black p-2 rounded-sm -translate-y-20 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 duration-300">ADD TO CART</motion.button>
+                                </div>
+                            </div>
                             <div className='py-2'>
                                 <h2 className='font-semibold'>{bundle.name}</h2>
                                 <p className='font-bold'>${bundle.price}</p>

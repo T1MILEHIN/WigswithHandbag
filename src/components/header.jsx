@@ -107,7 +107,10 @@ const Header = () => {
                 </div>
                 <Drawer>
                     <DrawerTrigger>
-                        <MdOutlineShoppingBag size={20} />
+                        <div className="relative">
+                            <MdOutlineShoppingBag size={30} />
+                            <span className="w-6 aspect-square flex justify-center items-center bg-black text-white absolute -top-1 -right-1 rounded-full">0</span>
+                        </div>
                     </DrawerTrigger>
                     <DrawerContent>
                         <DrawerHeader>

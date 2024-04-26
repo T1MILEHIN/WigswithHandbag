@@ -4,6 +4,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400
 
 import { Providers } from "./providers";
 import { AuthProvider } from "@/contexts/authContext";
+import { CartProvider } from "@/contexts/cartContext";
 
 export const metadata = {
   title: "EvaTouch",
@@ -22,11 +23,13 @@ export default function Layout({ children }) {
       <body className={vollkorn.className}>
         <div className="">
           <section>
-            <AuthProvider>
-              <Providers>
-                {children}
-              </Providers>
-            </AuthProvider>
+            <CartProvider>
+              <AuthProvider>
+                <Providers>
+                  {children}
+                </Providers>
+              </AuthProvider>
+            </CartProvider>
           </section>
         </div>
       </body>
