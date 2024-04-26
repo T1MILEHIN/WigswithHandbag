@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useState, useEffect, createContext } from "react";
 import { Toaster, toast } from 'sonner';
 
@@ -6,13 +6,12 @@ export const CartContext = createContext({})
 
 export const CartProvider = ({children}) => {
     const [cartItem, setCartItem] = useState(() => {
-        if (localStorage.getItem("CartItem"))
+        if (localStorage.getItem("CartItem")) {
             return JSON.parse(localStorage.getItem("CartItem")) || [];
+        }
     });
     const addToCart = (data) => {
-        if (!cartItem.some((item) => item.id === data.id)) {
             toast.success(`Successfully added to cart`);
-            setCartItem((prev) => [...prev, data]);
         }
     }
 
