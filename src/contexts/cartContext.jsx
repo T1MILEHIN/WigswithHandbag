@@ -5,17 +5,21 @@ import { Toaster, toast } from 'sonner';
 export const CartContext = createContext({})
 
 export const CartProvider = ({children}) => {
-    const [cartItem, setCartItem] = useState(()=> localStorage.getItem("cart-item") ? JSON.parse(localStorage.getItem("cart-item")) :  []);
+    const [cartItem, setCartItem] = useState(()=> {
+            const storedItems = localStorage.getItem("cart-item");
+            return storedItems ? JSON.parse(storedItems) : []
+        }
+    )
     const addToCart = (data) => {
         if (!cartItem.some((item)=> item.id === data.id)) {
             setCartItem(prev=> ([...prev, data]));
             toast.success(`Successfully added to cart`);
         } else {
-            toast.error("Already in Your cart")
+            toast.error("Item is already in your cart");
         }
     }
     useEffect(()=> {
-        localStorage.setItem("cart-item", JSON.stringify(cartItem))
+        localStorage.setItem("cart-item", JSON.stringify(cartItem));
     }, [cartItem])
 
     return (
@@ -28,7 +32,4 @@ export const CartProvider = ({children}) => {
             </div>
         </CartContext.Provider>
     )
-    
-    
-
 }
