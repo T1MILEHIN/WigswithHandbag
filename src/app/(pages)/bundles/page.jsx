@@ -118,8 +118,10 @@ const Page = () => {
             <h1 className="my-2 text-center font-bold text-xl md:text-3xl text-[#7F6000]">Bundles</h1>
             <div className="flex flex-col gap-5 my-4">
                 <div className="flex items-center gap-2">
-                    <Image src={imageFile ? URL?.createObjectURL(imageFile) : upload} width={100} height={100} alt="preview" className="w-24 aspect-square rounded-sm object-cover" />
-                    <input onChange={(e)=> setImageFile(e.target.files[0])} name="image" className="pl-5 h-8 md:h-10" type="file" placeholder="" />
+                    <motion.label whileTap={{scale: 0.8}} htmlFor="image">
+                        <Image src={imageFile ? URL?.createObjectURL(imageFile) : upload} width={100} height={100} alt="preview" className="cursor-pointer w-24 aspect-square rounded-full border-2 border-black object-cover" />
+                    </motion.label>
+                    <input onChange={(e)=> setImageFile(e.target.files[0])} id='image' name="image" className="pl-5 h-8 md:h-10 hidden" type="file" placeholder="" />
                 </div>
                 <input onChange={handleInput} value={data.name} name="name" className="w-full pl-5 border-2 border-black h-9 md:h-10" type="text" placeholder="name" />
                 <input onChange={handleInput} value={data.price} name="price" className="w-full pl-5 border-2 border-black h-9 md:h-10" type="number" placeholder="price" />
