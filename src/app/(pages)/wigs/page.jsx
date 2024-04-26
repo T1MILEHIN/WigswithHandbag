@@ -1,11 +1,11 @@
 "use client"
 import { useState, useEffect } from "react";
-import wig_one from "../../images/wig1.png"
-import wig_two from "../../images/wig2.png"
-import wig_three from "../../images/wig3.png"
-import wig_four from "../../images/wig4.png"
-import wig_five from "../../images/wig5.png"
-import wig_six from "../../images/wig6.png"
+import upload from "../../images/upload.webp"
+// import wig_two from "../../images/wig2.png"
+// import wig_three from "../../images/wig3.png"
+// import wig_four from "../../images/wig4.png"
+// import wig_five from "../../images/wig5.png"
+// import wig_six from "../../images/wig6.png"
 import Image from 'next/image'
 import { motion } from "framer-motion";
 import { collection, getDocs, serverTimestamp } from "firebase/firestore"
@@ -15,6 +15,9 @@ import { addDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { v4 } from "uuid";
 import { toast } from 'sonner';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import Loading from "../loading";
 
 const Page = () => {
   const [allWigs, setAllWigs] = useState([])
@@ -94,8 +97,6 @@ const Page = () => {
       try {
         const querySnapshot = await getDocs(collection(db, "wigs"));
         querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, " => ", doc.data());
           wigs.push({id: doc.id, ...doc.data()})
         });
         setAllWigs(wigs)
@@ -106,14 +107,13 @@ const Page = () => {
     fetchWigs();
   }, [])
 
-  
 
   return (
     <div className="">
       <h1 className="my-2 text-center font-bold text-xl md:text-3xl text-[#7F6000]">Wigs</h1>
       <div className="flex flex-col gap-3 my-4">
         <div className="flex items-center gap-2">
-          <Image src={imageFile ? URL?.createObjectURL(imageFile) : wig_one} width={100} height={100} alt="preview" className="w-24 aspect-square rounded-sm object-cover" />
+          <Image src={imageFile ? URL?.createObjectURL(imageFile) : upload} width={100} height={100} alt="preview" className="w-24 aspect-square rounded-sm object-cover" />
           <input onChange={(e)=> setImageFile(e.target.files[0])} name="image" className="pl-5 h-8 md:h-10" type="file" placeholder="" />
         </div>
         <input onChange={handleInput} value={data.name} name="name" className="w-full pl-5 border-2 border-black h-9 md:h-10" type="text" placeholder="name" />
@@ -124,14 +124,14 @@ const Page = () => {
       <section className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {allWigs?.map((wig, index)=> (
           <div key={index} className="w-full aspect-square">
-            <Image src={wig.image} width={1000} height={1000} alt={wig.name}/>
+            <LazyLoadImage effect="blur" placeholder={<Loading />} src={wig.image} alt={wig.name} className="w-fit"/>
             <div className='py-2'>
               <h2 className='font-semibold'>{wig.name}</h2>
               <p className='font-bold'>${wig.price}.00</p>
             </div>
           </div>
         ))}
-        <div className="w-full aspect-square">
+        {/* <div className="w-full aspect-square">
           <Image placeholder='blur' src={wig_one} width={1000} height={1000} alt='wigs'/>
           <div className='py-2'>
             <h2 className='font-semibold'>The Kim K wig</h2>
@@ -172,7 +172,7 @@ const Page = () => {
             <h2 className='font-semibold'>The Khloe Wig</h2>
             <p className='font-bold'>$250.00</p>
           </div>
-        </div>
+        </div> */}
       </section>
     </div>
   )
