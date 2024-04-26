@@ -5,24 +5,24 @@ import { Toaster, toast } from 'sonner';
 export const CartContext = createContext({})
 
 export const CartProvider = ({children}) => {
-    const  [cartItems, setCartItems] = useState([]);
-    // Add item to cart
-    useEffect(()=> {
-        const  cartFromLocalStorage = localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem('cart')) : [];
-        if (cartFromLocalStorage){
-            setCartItems([...JSON.parse(localStorage.getItem("cartItems"))  ])
+    const [cartItem, setCartItem] = useState(() => {
+        if (localStorage.getItem("CartItem"))
+            return JSON.parse(localStorage.getItem("CartItem")) || [];
+    });
+    const addToCart = (data) => {
+        if (!cartItem.some((item) => item.id === data.id)) {
+            toast.success(`Successfully added to cart`);
+            setCartItem((prev) => [...prev, data]);
         }
-        else {
-            setCartItems([])
-        };
-    }, [cartItems])
-
-    const addCartItem = (item)=> {
-        console.log(cartItem)
     }
 
+    useEffect(() => {
+        const items = JSON.parse(localStorage.getItem("CartItem")) || [];
+        setCartItem(items);
+    }, [])
+
     return (
-        <CartContext.Provider value={{addCartItem}}>
+        <CartContext.Provider value={{cartItem, addCartItem}}>
             <Toaster position="top-center" />
             <div className="relative">
                 <>
