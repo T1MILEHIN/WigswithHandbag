@@ -1,11 +1,6 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import upload from "../../images/upload.webp"
-// import wig_two from "../../images/wig2.png"
-// import wig_three from "../../images/wig3.png"
-// import wig_four from "../../images/wig4.png"
-// import wig_five from "../../images/wig5.png"
-// import wig_six from "../../images/wig6.png"
 import Image from 'next/image'
 import { motion } from "framer-motion";
 import { collection, getDocs, serverTimestamp } from "firebase/firestore"
@@ -18,8 +13,10 @@ import { toast } from 'sonner';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import Loading from "../loading";
+import { CartContext } from "@/contexts/cartContext";
 
 const Page = () => {
+  const { addToCart } = useContext(CartContext);
   const [allWigs, setAllWigs] = useState([])
   const [imageFile, setImageFile] = useState("");
   const [perc, setPerc] = useState(null)
@@ -30,7 +27,7 @@ const Page = () => {
     image: undefined,
   })
   const handleInput = (e)=> {
-    const {name , value, type, files} = e.target;
+    const {name , value, type} = e.target;
     setData(prev=> (
       {
         ...prev,
@@ -118,22 +115,22 @@ const Page = () => {
       <div className="flex flex-col gap-5 my-4">
         <div className="flex items-center gap-2">
           <motion.label whileTap={{scale: 0.8}} htmlFor="image">
-            <Image src={imageFile ? URL?.createObjectURL(imageFile) : upload} width={100} height={100} alt="preview" className=" cursor-pointer w-24 aspect-square rounded-full border-2 border-black object-cover" />
+            <Image src={imageFile ? URL?.createObjectURL(imageFile) : upload} width={100} height={100}  alt="preview" className=" cursor-pointer w-20 aspect-square rounded-full border-2 border-black object-cover" />
           </motion.label>
           <input onChange={(e)=> setImageFile(e.target.files[0])} id="image" name="image" className="pl-5 h-8 md:h-10 hidden" type="file" placeholder="" />
         </div>
         <input onChange={handleInput} value={data.name} name="name" className="w-full pl-5 border-2 border-black h-9 md:h-10" type="text" placeholder="name" />
         <input onChange={handleInput} value={data.price} name="price" className="w-full pl-5 border-2 border-black h-9 md:h-10" type="number" placeholder="price" />
         <input onChange={handleInput} value={data.discount} name="discount" className="w-full pl-5 border-2 border-black h-9 md:h-10" type="number" placeholder="discount" />
-        <motion.button onClick={()=> postWigs()} disabled={perc !== null && perc < 100} whileTap={{scale: 0.95}} className="bg-black text-white rounded-sm p-2 disabled:bg-red-600">UPLOAD</motion.button>
+        <motion.button onClick={()=> postWigs()} disabled={perc !== null && perc < 100} whileTap={{scale: 0.95}} className="bg-black text-white rounded-sm p-2 disabled:bg-red-600 disabled:cursor-not-allowed">UPLOAD</motion.button>
       </div>
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {allWigs?.map((wig, index)=> (
           <div key={index} className="w-full aspect-square">
             <div className="relative group">
               <LazyLoadImage effect="blur" placeholder={<Loading />} src={wig.image} alt={wig.name} className="w-full"/>
               <div className="absolute top-0 bottom-2 left-0 right-0 bg-black bg-opacity-60 invisible opacity-0 group-hover:visible group-hover:opacity-100 duration-300 flex justify-center items-center">
-                <motion.button whileTap={{scale: 0.8}} className="shadow-lg bg-white text-black p-2 rounded-sm -translate-y-20 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 duration-300">ADD TO CART</motion.button>
+                <motion.button onClick={()=> addToCart(wig)} whileTap={{scale: 0.8}} className="shadow-lg bg-white text-black p-2 rounded-sm -translate-y-20 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 duration-300">ADD TO CART</motion.button>
               </div>
             </div>
             <div className='py-2'>
@@ -142,48 +139,6 @@ const Page = () => {
             </div>
           </div>
         ))}
-        {/* <div className="w-full aspect-square">
-          <Image placeholder='blur' src={wig_one} width={1000} height={1000} alt='wigs'/>
-          <div className='py-2'>
-            <h2 className='font-semibold'>The Kim K wig</h2>
-            <p className='font-bold'>$750.00</p>
-          </div>
-        </div>
-        <div className="w-full aspect-square">
-          <Image placeholder='blur' src={wig_two} width={1000} height={1000} alt='wigs'/>
-          <div className='py-2'>
-            <h2 className='font-semibold'>The Audrey Wig</h2>
-            <p className='font-bold'>$730.00</p>
-          </div>
-        </div>
-        <div className="w-full aspect-square">
-          <Image placeholder='blur' src={wig_three} width={1000} height={1000} alt='wigs'/>
-          <div className='py-2'>
-            <h2 className='font-semibold'>The Ava Wig</h2>
-            <p className='font-bold'>$550.00</p>
-          </div>
-        </div>
-        <div className="w-full aspect-square">
-          <Image placeholder='blur' src={wig_four} width={1000} height={1000} alt='wigs'/>
-          <div className='py-2'>
-            <h2 className='font-semibold'>The Eva Wig</h2>
-            <p className='font-bold'>$320.00</p>
-          </div>
-        </div>
-        <div className="w-full aspect-square">
-          <Image placeholder='blur' src={wig_five} width={1000} height={1000} alt='wigs'/>
-          <div className='py-2'>
-            <h2 className='font-semibold'>The Kelly Wig</h2>
-            <p className='font-bold'>$120.00</p>
-          </div>
-        </div>
-        <div className="w-full aspect-square">
-          <Image placeholder='blur' src={wig_six} width={1000} height={1000} alt='wigs'/>
-          <div className='py-2'>
-            <h2 className='font-semibold'>The Khloe Wig</h2>
-            <p className='font-bold'>$250.00</p>
-          </div>
-        </div> */}
       </section>
     </div>
   )

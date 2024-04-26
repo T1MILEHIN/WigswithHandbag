@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import LOGO from "../app/images/eva.png"
 import Image from "next/image";
 import { AuthContext } from "@/contexts/authContext";
+import { CartContext } from "@/contexts/cartContext";
 import { useRouter } from "next/navigation";
 import { toast } from 'sonner';
 
@@ -75,6 +76,7 @@ const Header = () => {
     const [subNav, setSubNav] = useState(false)
     const [subNav2, setSubNav2] = useState(false)
     const {user, logOut} = useContext(AuthContext)
+    const { cartItem } = useContext(CartContext)
     const router = useRouter()
     const openSubNav = () => {
         setSubNav(prev => !prev)
@@ -94,7 +96,7 @@ const Header = () => {
         }
     }
     return (
-        <header className="lg:px-20 px-4 bg-white fixed w-full left-0 top-0 flex items-center justify-between z-[9999]">
+        <header className="shadow-sm lg:px-20 px-4 bg-white fixed w-full left-0 top-0 flex items-center justify-between z-[9999]">
             <div className="lg:block hidden"><Link href="/"><Image src={LOGO} width={60} height={60} style={{width: "auto"}} alt="LOGO" /></Link></div>
             <div className="lg:hidden block"><Link href="/"><Image src={LOGO} width={40} height={40} style={{width: "auto"}} alt="LOGO" /></Link></div>
             <nav className="lg:block hidden">
@@ -105,11 +107,12 @@ const Header = () => {
                     <input className="pl-10 border-2 border-black h-9 md:h-12" type="text" placeholder="Search" />
                     <IoMdSearch className="absolute left-5 top-1/2 -translate-y-1/2" size={20} />
                 </div>
+                {!cartItem.length ?
                 <Drawer>
                     <DrawerTrigger>
                         <div className="relative">
                             <MdOutlineShoppingBag size={30} />
-                            <span className="w-6 aspect-square flex justify-center items-center bg-black text-white absolute -top-1 -right-1 rounded-full">0</span>
+                            <span className="w-6 aspect-square flex justify-center items-center bg-black text-white absolute -top-1 -right-1 rounded-full">{cartItem.length}</span>
                         </div>
                     </DrawerTrigger>
                     <DrawerContent>
@@ -127,6 +130,12 @@ const Header = () => {
                         </DrawerFooter>
                     </DrawerContent>
                 </Drawer>
+                :
+                <div className="relative">
+                    <MdOutlineShoppingBag size={30} />
+                    <span className="w-6 aspect-square flex justify-center items-center bg-black text-white absolute -top-1 -right-1 rounded-full">{cartItem.length}</span>
+                </div>
+                }
                 <div>
                     <FaUser className="cursor-pointer" onClick={()=>profile()} size={20} />
                 </div>

@@ -22,13 +22,13 @@ export default function Layout({ children }) {
       <body className={vollkorn.className}>
         <div className="">
           <section>
-            <CartProvider>
-              <AuthProvider>
-                <Providers>
-                  {children}
-                </Providers>
-              </AuthProvider>
-            </CartProvider>
+            <AuthProvider>
+              <CartProvider>
+                  <Providers>
+                    {children}
+                  </Providers>
+              </CartProvider>
+            </AuthProvider>
           </section>
         </div>
       </body>
