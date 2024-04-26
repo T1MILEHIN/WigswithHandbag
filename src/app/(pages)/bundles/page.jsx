@@ -2,12 +2,12 @@
 import Image from 'next/image'
 import React, {useState, useEffect} from 'react'
 import upload from "../../images/upload.webp"
-import bundle_one from "../../images/bundle1.jpg"
-import bundle_two from "../../images/bundle2.png"
-import bundle_three from "../../images/bundle3.png"
-import bundle_four from "../../images/bundle4.png"
-import bundle_five from "../../images/bundle5.png"
-import bundle_six from "../../images/bundle6.png"
+// import bundle_one from "../../images/bundle1.jpg"
+// import bundle_two from "../../images/bundle2.png"
+// import bundle_three from "../../images/bundle3.png"
+// import bundle_four from "../../images/bundle4.png"
+// import bundle_five from "../../images/bundle5.png"
+// import bundle_six from "../../images/bundle6.png"
 import { motion } from "framer-motion";
 import { collection, getDocs, serverTimestamp } from "firebase/firestore"
 import { db } from "@/firebase.config"
@@ -130,7 +130,7 @@ const Page = () => {
                 {!allBundles ? <h1 className='col-span-1 md:col-span-3 text-center'>No Available Bundle Right Now. Check Back Later</h1> : (
                     allBundles.map((bundle, index)=> (
                         <div key={index} className="">
-                             <LazyLoadImage effect="blur" placeholder={<Loading />} src={bundle.image} alt={bundle.name} className="w-fit"/>
+                             <LazyLoadImage effect="blur" placeholder={<Loading />} src={bundle.image} alt={bundle.name} className="w-full"/>
                             <div className='py-2'>
                                 <h2 className='font-semibold'>{bundle.name}</h2>
                                 <p className='font-bold'>${bundle.price}</p>

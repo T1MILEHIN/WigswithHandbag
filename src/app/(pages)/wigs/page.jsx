@@ -128,7 +128,7 @@ const Page = () => {
       <section className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {allWigs?.map((wig, index)=> (
           <div key={index} className="w-full aspect-square">
-            <LazyLoadImage effect="blur" placeholder={<Loading />} src={wig.image} alt={wig.name} className="w-fit"/>
+            <LazyLoadImage effect="blur" placeholder={<Loading />} src={wig.image} alt={wig.name} className="w-full"/>
             <div className='py-2'>
               <h2 className='font-semibold'>{wig.name}</h2>
               <p className='font-bold'>${wig.price}.00</p>
