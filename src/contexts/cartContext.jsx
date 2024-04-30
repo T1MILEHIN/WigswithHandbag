@@ -9,6 +9,7 @@ export const CartProvider = ({children}) => {
     const addToCart = (data) => {
         if (!cartItem.some((item)=> item.id === data.id)) {
             setCartItem(prev=> ([...prev, data]));
+            localStorage.setItem("cart-item", JSON.stringify(cartItem))
             toast.success(`Successfully added to cart`);
         } else {
             toast.error("Item is already in your cart");
