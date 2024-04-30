@@ -6,6 +6,7 @@ import LandingParallax from "./landingParallax";
 import Slider from "./slider";
 import SlideController from "./slideController";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import DisplayHome from "./displayHome";
 import best_one from "../app/images/best1.png"
 import best_two from "../app/images/best2.png"
@@ -34,7 +35,9 @@ const Landing = () => {
             <h1 className="font-bold text-3xl md:text-4xl">Create Your Own Unique Sense of Style</h1>
             <p className="text-lg md:text-2xl my-4">The ultimate feel and look Good store</p>
             <div className="text-base md:text-xl flex items-center gap-3 md:gap-4 font-bold w-fit md:mx-auto">
-              <button className="md:px-5 px-2 py-3 md:py-4 text-black bg-white">SHOP NOW</button>
+              <Link href="/wigs">
+                <motion.button whileTap={{scale: 0.8}} whileHover={{scale:1.1}} className="md:px-5 px-2 py-3 md:py-4 text-black bg-white">SHOP NOW</motion.button>
+              </Link>
               <button className="md:px-5 px-2 py-3 md:py-4 bg-transparent text-white border-2 border-white">BOOK APPOINTMENT</button>
             </div>
           </div>
