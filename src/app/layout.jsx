@@ -22,11 +22,12 @@ export default function Layout({ children }) {
       <body className={vollkorn.className}>
         <div className="">
           <section>
+            <h1>HELLO</h1>
             <AuthProvider>
               <CartProvider>
-                  <Providers>
-                    {children}
-                  </Providers>
+                <Providers>
+                  {children}
+                </Providers>
               </CartProvider>
             </AuthProvider>
           </section>

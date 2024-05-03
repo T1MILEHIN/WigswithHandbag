@@ -73,7 +73,7 @@ const Page = () => {
     }, [imageFile])
 
     const postBundles = async()=> {
-        if (!data.name.trim() || !data.image.trim() || !data.discount.trim() || !data.price.trim()) {
+        if (!data.name.trim() || !data.image.trim() || !data.price.trim()) {
             toast.error("Can't leave fields Empty")
             return;
         }
@@ -114,9 +114,9 @@ const Page = () => {
             <h1 className="my-2 text-center font-bold text-xl md:text-3xl text-[#7F6000]">Bundles</h1>
             <div className="flex flex-col gap-5 my-4">
                 <div className="flex items-center gap-2">
-                    <motion.label whileTap={{scale: 0.8}} htmlFor="image">
+                    <label htmlFor="image">
                         <Image src={imageFile ? URL?.createObjectURL(imageFile) : upload} width={100} height={100} alt="preview" className="cursor-pointer w-20 aspect-square rounded-full border-2 border-black object-cover" />
-                    </motion.label>
+                    </label>
                     <input onChange={(e)=> setImageFile(e.target.files[0])} id='image' name="image" className="pl-5 h-8 md:h-10 hidden" type="file" placeholder="" />
                 </div>
                 <input onChange={handleInput} value={data.name} name="name" className="w-full pl-5 border-2 border-black h-9 md:h-10" type="text" placeholder="name" />
@@ -129,7 +129,7 @@ const Page = () => {
                     allBundles.map((bundle, index)=> (
                         <div key={index} className="">
                             <div className="relative group">
-                                <LazyLoadImage effect="blur" placeholder={<Loading />} src={bundle.image} alt={bundle.name} className="w-full"/>
+                                <LazyLoadImage effect="blur" src={bundle.image} alt={bundle.name} className="w-full"/>
                                 <div className="absolute top-0 bottom-2 left-0 right-0 bg-black bg-opacity-60 invisible opacity-0 group-hover:visible group-hover:opacity-100 duration-300 flex justify-center items-center">
                                     <motion.button onClick={()=> addToCart(bundle)} whileTap={{scale: 0.8}} className="shadow-lg bg-white text-black p-2 rounded-sm -translate-y-20 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 duration-300">ADD TO CART</motion.button>
                                 </div>

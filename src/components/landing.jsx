@@ -1,7 +1,5 @@
-
 import Options from "./options";
 import { Vollkorn, Poppins } from "next/font/google";
-import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
 import LandingParallax from "./landingParallax";
 import Slider from "./slider";
 import SlideController from "./slideController";
@@ -44,9 +42,7 @@ const Landing = () => {
         </section>
       </div>
       <LandingParallax />
-
       <Options />
-
       <section className="md:my-32 my-10 md:px-20 px-4 ">
         <div className="relative flex justify-between my-4">
           <div>
@@ -55,7 +51,6 @@ const Landing = () => {
           </div>
           {/* <SlideController /> */}
         </div>
-
         <Slider />
       </section>
 
@@ -69,11 +64,11 @@ const Landing = () => {
         </div>
 
         <Slider 
-        best1={best_one}
-        best2 ={best_two}
-        best3 ={best_three}
-        best4={best_four}
-        rtl={true}
+          best1={best_one}
+          best2 ={best_two}
+          best3 ={best_three}
+          best4={best_four}
+          rtl={true}
          />
       </section>
 

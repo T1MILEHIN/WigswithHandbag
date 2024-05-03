@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useState, useEffect, createContext } from "react";
 import { Toaster, toast } from 'sonner';
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
@@ -34,8 +34,8 @@ export const AuthProvider = ({children}) => {
         const storedToken = localStorage.getItem("token");
 
         if (storedUser && storedToken) {
-        setUser(JSON.parse(storedUser));
-        setUserToken(JSON.parse(storedToken));
+            setUser(JSON.parse(storedUser));
+            setUserToken(JSON.parse(storedToken));
         }
     }, [user, userToken]);
     const logOut = ()=> {

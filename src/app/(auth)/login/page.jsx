@@ -35,7 +35,7 @@ const Page = () => {
             setUser(response?.user)
             setUserToken(response?.user.accessToken)
             localStorage.setItem("token", JSON.stringify(response?.user.accessToken))
-            localStorage.setItem("user", JSON.stringify(response?.user))
+            // localStorage.setItem("user", JSON.stringify(response?.user))
             toast.success("Welcome to EvaTouch Beauty!")
             setLoading(false)
             reset()

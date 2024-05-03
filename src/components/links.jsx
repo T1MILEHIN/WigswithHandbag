@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import {
     FiChevronDown,
 } from "react-icons/fi";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion"
 
 
 const Links = () => {

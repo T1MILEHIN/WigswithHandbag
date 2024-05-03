@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import Image from 'next/image'
 import landing1 from "../../src/app/images/landing1.jpg"
 import landing2 from "../../src/app/images/landing2.jpg"
@@ -55,21 +55,23 @@ const imageVariant3 = {
 export default function DisplayHome() {
     return (
         <Parallax
-            translateY={["0px", "200px"]}
-            speed={12}
+            translateY={["0px", "150px"]}
+            speed={15}
             easing="easeInQuad"
             className='overflow-hidden'>
-            <motion.div variants={containerVariant} initial="initial" animate="animate" className="overflow-hidden bg-image">
-                <motion.div variants={imageVariant1} className="lg:block hidden">
-                    <Image src={landing1} width={300} height={300} alt="landing-img" className="object-cover" />
+            <div>
+                <motion.div variants={containerVariant} initial="initial" animate="animate" className="overflow-hidden bg-image">
+                    <motion.div variants={imageVariant1} className="lg:block hidden">
+                        <Image src={landing1} width={300} height={300} alt="landing-img" className="object-cover" />
+                    </motion.div>
+                    <motion.div variants={imageVariant2} className="">
+                        <Image src={landing2} width={300} height={300} alt="landing-img" className="object-cover" />
+                    </motion.div>
+                    <motion.div variants={imageVariant3} className="lg:block hidden">
+                        <Image src={landing3} width={400} height={400} alt="landing-img" className="object-cover" />
+                    </motion.div>
                 </motion.div>
-                <motion.div variants={imageVariant2} className="">
-                    <Image src={landing2} width={300} height={300} alt="landing-img" className="object-cover" />
-                </motion.div>
-                <motion.div variants={imageVariant3} className="lg:block hidden">
-                    <Image src={landing3} width={400} height={400} alt="landing-img" className="object-cover" />
-                </motion.div>
-            </motion.div>
+            </div>
         </Parallax>
       
     )
