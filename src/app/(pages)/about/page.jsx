@@ -28,6 +28,7 @@ const AboutUs = () => {
         </div>
 
         <div className='flex gap-10 items-center md:flex-row flex-col my-10 md:my-10'>
+            
             <div className="border-2 flex-1 w-full aspect-square bg-black"></div>
             <div className='flex-1'>
                 <h1 className='my-3 font-bold text-3xl md:text-5xl'><span className={poppins.className}>Meet the Genius Behind the Brand</span></h1>

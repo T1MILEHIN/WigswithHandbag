@@ -1,30 +1,33 @@
 "use client"
+import { FaCheck } from "react-icons/fa";
 import { useState, useEffect, createContext } from "react";
 import { Toaster, toast } from 'sonner';
 
 export const CartContext = createContext({})
 
-export const CartProvider = ({children}) => {
-    const [cartItem, setCartItem] = useState([])
+export const CartProvider = ({ children }) => {
+    const [cartItem, setCartItem] = useState(() => localStorage.getItem("cart-item") ? JSON.parse(localStorage.getItem("cart-item")) : [])
     const addToCart = (data) => {
-        if (!cartItem.some((item)=> item.id === data.id)) {
-            setCartItem(prev=> ([...prev, data]));
-            localStorage.setItem("cart-item", JSON.stringify(cartItem))
-            toast.success(`Successfully added to cart`);
+        if (!cartItem.some((item) => item.id === data.id)) {
+            console.log(data)
+            setCartItem((prev) => [...prev, data])
+            toast.success(`Successfully added to cart`,
+            {
+                icon: <FaCheck color="green" />
+            }
+        );
         } else {
             toast.error("Item is already in your cart");
         }
+        console.log(cartItem)
     }
-    // useEffect(() => {
-    //     if (cartItem) {
-    //         setCartItem(localStorage.getItem("cart-item"));
-    //     } else {
-    //         setCartItem([]);
-    //     }
-    // }, [cartItem]);
+
+    useEffect(() => {
+        localStorage.setItem("cart-item", JSON.stringify(cartItem))
+    }, [cartItem]);
 
     return (
-        <CartContext.Provider value={{cartItem, addToCart}}>
+        <CartContext.Provider value={{ cartItem, setCartItem, addToCart }}>
             <Toaster position="top-center" />
             <div className="relative">
                 <>

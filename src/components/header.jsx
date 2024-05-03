@@ -90,7 +90,7 @@ const Header = () => {
         if (!user)
         {
             toast.error(<p className="text-center font-semibold text-sm">You are not logged in Now <br /> But you be redirected to the Login Page</p>, {
-                position: "top-center"
+                position: "top-center",
             })
             router.push("/login")
         }
@@ -117,13 +117,13 @@ const Header = () => {
                     </DrawerTrigger>
                     <DrawerContent>
                         <DrawerHeader>
-                            <div className="mx-auto text-center">
+                            <div className="mx-auto text-center font-semibold leading-5">
                                 <DrawerTitle>No Item in Your Cart Now!!</DrawerTitle>
                                 <DrawerDescription>Would you like to go through our products?.</DrawerDescription>
                             </div>
                         </DrawerHeader>
                         <DrawerFooter className="mx-auto">
-                            <Button className="">Yes</Button>
+                            <Button className=""><Link href="/wigs">Yes</Link></Button>
                             <DrawerClose>
                                 <Button variant="outline" className="" >Cancel</Button>
                             </DrawerClose>
@@ -131,10 +131,12 @@ const Header = () => {
                     </DrawerContent>
                 </Drawer>
                 :
-                <div className="relative">
-                    <MdOutlineShoppingBag size={30} />
-                    <span className="w-6 aspect-square flex justify-center items-center bg-black text-white absolute -top-1 -right-1 rounded-full">{cartItem.length}</span>
-                </div>
+                <Link href="/cart">
+                    <div className="relative">
+                        <MdOutlineShoppingBag size={30} />
+                        <span className="w-6 aspect-square flex justify-center items-center bg-black text-white absolute -top-1 -right-1 rounded-full">{cartItem.length}</span>
+                    </div>
+                </Link>
                 }
                 <div>
                     <FaUser className="cursor-pointer" onClick={()=>profile()} size={20} />
@@ -148,7 +150,7 @@ const Header = () => {
                             <FaXmark color="white" size={20} />
                         </div>
                         :
-                        <div className="z-[9999999] text-xl md:text-2xl relative border-2 border-white" onClick={() => setNav(prev => !prev)}>
+                        <div className="z-[9999999] text-xl md:text-2xl relative border-2 border-black" onClick={() => setNav(prev => !prev)}>
                             <FaBars color="white" size={20} />
                         </div>
                     }
@@ -183,13 +185,13 @@ const Header = () => {
                             (
                                 <>
                                     <Link href="/login">
-                                        <motion.li whileTap={{scale: 0.8}} initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 5, duration: 3}}>
-                                            <button className="w-full rounded-sm border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-black py-2 px-2 font-semibold text-white text-base md:text-base">LOGIN</button>
+                                        <motion.li whileTap={{scale: 0.8}} initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 3, duration: 3}}>
+                                            <button className="w-full rounded-sm border-2 hover:bg-transparent hover:text-black duration-300 py-2 px-2 font-semibold text-white text-base md:text-base border-[#7F6000]">LOGIN</button>
                                         </motion.li>
                                     </Link>
                                     <Link href="/createAccount">
-                                        <motion.li whileTap={{scale: 0.8}} initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 5, duration: 3}}>
-                                            <button className="w-full rounded-sm border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-black py-2 px-2 font-semibold text-white text-base md:text-base">SIGNUP</button>
+                                        <motion.li whileTap={{scale: 0.8}} initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 3, duration: 3}}>
+                                            <button className="w-full rounded-sm border-2 border-black hover:bg-transparent hover:text-black duration-300 py-2 px-2 font-semibold text-white text-base md:text-base bg-[#7F6000]">SIGNUP</button>
                                         </motion.li>
                                     </Link>
                                 </>

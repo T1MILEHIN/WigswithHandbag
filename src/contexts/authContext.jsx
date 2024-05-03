@@ -9,8 +9,8 @@ import AuthLoader from "@/components/authLoader";
 export const AuthContext = createContext({})
 export const AuthProvider = ({children}) => {
     const router = useRouter()
-    const [user, setUser] = useState(null);
-    const [userToken, setUserToken] = useState(null);
+    const [user, setUser] = useState(()=> localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null);
+    const [userToken, setUserToken] = useState(()=> localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null);
     const [loading, setLoading] = useState(false);
 
     const googlePopUp = async()=> {
@@ -28,16 +28,6 @@ export const AuthProvider = ({children}) => {
             console.log(error)
         }
     }
-    // Access localStorage after component mounts
-    useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-        const storedToken = localStorage.getItem("token");
-
-        if (storedUser && storedToken) {
-            setUser(JSON.parse(storedUser));
-            setUserToken(JSON.parse(storedToken));
-        }
-    }, [user, userToken]);
     const logOut = ()=> {
         setLoading(true)
         try {
@@ -46,17 +36,29 @@ export const AuthProvider = ({children}) => {
             localStorage.removeItem("token")
             localStorage.removeItem("user")
             signOut(auth)
+            setLoading(false)
             toast.success("Logged Out Successfully", {
                 position: "top-right"
             })
-            setTimeout(() => {
-                setLoading(false)
-                router.push("/login")
-            }, 2000);
+            // setTimeout(() => {
+                //     router.push("/login")
+            // }, 2000);
         } catch (error) {
             console.log(error)
+            setLoading(false)
         }
     }
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        const storedToken = localStorage.getItem("token");
+        if (storedUser || storedToken) {
+            setUser(JSON.parse(storedUser));
+            setUserToken(JSON.parse(storedToken));
+        } else {
+            setUser(null);
+            setUserToken(null);
+        }
+    }, [user, userToken]);
     return (
         <AuthContext.Provider value={{loading, setLoading, user, setUser, userToken, setUserToken, googlePopUp, logOut}}>
             <Toaster position="top-center" />

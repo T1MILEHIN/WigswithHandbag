@@ -35,10 +35,10 @@ const Page = () => {
             setUser(response?.user)
             setUserToken(response?.user.accessToken)
             localStorage.setItem("token", JSON.stringify(response?.user.accessToken))
-            // localStorage.setItem("user", JSON.stringify(response?.user))
+            localStorage.setItem("user", JSON.stringify(response?.user))
             toast.success("Welcome to EvaTouch Beauty!")
+            reset();
             setLoading(false)
-            reset()
             router.push("/")
         }).catch((error)=> {
             console.log(error)

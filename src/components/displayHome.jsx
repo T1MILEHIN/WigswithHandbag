@@ -66,7 +66,7 @@ export default function DisplayHome() {
                         <Image src={landing1} width={300} height={300} alt="landing-img" className="object-cover" />
                     </motion.div>
                     <motion.div variants={imageVariant2} className="">
-                        <Image src={landing2} width={300} height={300} alt="landing-img" className="object-cover" />
+                        <Image priority="true" src={landing2} width={300} height={300} alt="landing-img" className="object-cover" />
                     </motion.div>
                     <motion.div variants={imageVariant3} className="lg:block hidden">
                         <Image src={landing3} width={400} height={400} alt="landing-img" className="object-cover" />
