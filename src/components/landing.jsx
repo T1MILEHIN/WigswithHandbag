@@ -1,3 +1,4 @@
+"use client"
 import Options from "./options";
 import { Vollkorn, Poppins } from "next/font/google";
 import LandingParallax from "./landingParallax";

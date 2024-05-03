@@ -1,5 +1,5 @@
 "use client"
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";

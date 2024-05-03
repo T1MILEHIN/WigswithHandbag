@@ -1,4 +1,5 @@
 "use client"
+import React from 'react'
 import Image from 'next/image'
 import landing1 from "../../src/app/images/landing1.jpg"
 import landing2 from "../../src/app/images/landing2.jpg"
