@@ -4,12 +4,12 @@ const Page = () => {
   return (
     <div>
         <div>
-            WELCOME TO OUR BOOKING PAGE
+            <p className='text-center font-bold text-sm lg:text-2xl'>WELCOME TO OUR BOOKING PAGE</p>
         </div>
 
 
         <section>
-            
+
         </section>
     </div>
   )
