@@ -1,4 +1,9 @@
 "use client"
+import { Vollkorn, Poppins } from "next/font/google";
+
+const vollkorn = Vollkorn({ subsets: ["latin"]})
+const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"]}, )
+
 import React, { useState, useContext } from "react";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
@@ -51,7 +56,7 @@ const ulVariant = {
     final: {
         opacity: 1,
         transition: {
-            duration: 0.5, delayChildren: 0.5, staggerChildren: 0.3
+            duration: 0.5, delayChildren: 0.5, staggerChildren: 0.3, when: "beforeChildren"
         }
     }
 }
@@ -87,19 +92,20 @@ const Header = () => {
         setSubNav(false)
     }
     const profile = ()=> {
-        if (!user)
-        {
+        if (!user) {
             toast.error(<p className="text-center font-semibold text-sm">You are not logged in Now <br /> But you be redirected to the Login Page</p>, {
                 position: "top-center",
             })
             router.push("/login")
+        } else {
+            toast.success("You are Logged in👍")
         }
     }
     return (
-        <header className="shadow-sm lg:px-20 px-4 bg-white fixed w-full left-0 top-0 flex items-center justify-between z-[9999]">
-            <div className="lg:block hidden"><Link href="/"><Image src={LOGO} width={60} height={60} style={{width: "auto"}} alt="LOGO" /></Link></div>
-            <div className="lg:hidden block"><Link href="/"><Image src={LOGO} width={40} height={40} style={{width: "auto"}} alt="LOGO" /></Link></div>
-            <nav className="lg:block hidden">
+        <header className={` ${vollkorn.className} shadow-sm lg:px-20 px-4 bg-white fixed w-full left-0 top-0 flex items-center justify-between z-[9999]`}>
+            <div className="xl:block hidden"><Link href="/"><Image src={LOGO} width={60} height={60} style={{width: "auto"}} alt="LOGO" /></Link></div>
+            <div className="xl:hidden block"><Link href="/"><Image src={LOGO} width={60} height={60} style={{width: "auto"}} alt="LOGO" /></Link></div>
+            <nav className="xl:block hidden">
                 <Links />
             </nav>
             <div className="md:flex hidden items-center gap-4 md:gap-10">
@@ -112,7 +118,7 @@ const Header = () => {
                     <DrawerTrigger>
                         <div className="relative">
                             <MdOutlineShoppingBag size={30} />
-                            <span className="w-6 aspect-square flex justify-center items-center bg-black text-white absolute -top-1 -right-1 rounded-full">{cartItem.length}</span>
+                            <span className="w-6 aspect-square flex justify-center items-center bg-[#7F6000] text-white absolute -top-1 -right-1 rounded-full">{cartItem.length}</span>
                         </div>
                     </DrawerTrigger>
                     <DrawerContent>
@@ -139,9 +145,9 @@ const Header = () => {
                 </Link>
                 }
                 <div>
-                    <FaUser className="cursor-pointer" onClick={()=>profile()} size={20} />
+                    <FaUser className="cursor-pointer" color="#7F6000" onClick={()=>profile()} size={20} />
                 </div>
-                {user && <button onClick={logOut} className="lg:block hidden w-full rounded-sm border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-black py-2 px-2 font-semibold text-white text-base md:text-base">LOGOUT</button>}
+                {user && <button onClick={logOut} className="lg:block hidden w-full rounded-sm border-2 border-[#7F6000] hover:bg-transparent hover:text-[#7F6000] duration-300 bg-[#7F6000] py-2 px-2 font-semibold text-white text-base md:text-base">LOGOUT</button>}
             </div>
             <motion.div className={`${nav ? "static" : "relative"} cursor-pointer bg-black p-2 rounded-md lg:hidden block`}>
                 <AnimatePresence>
@@ -175,25 +181,25 @@ const Header = () => {
                             <motion.li variants={liVariant}><Link className={`${pathname === "/about" && "nav-others"} nav-active px-3 py-3`} href="/about">About Us</Link></motion.li>
                             <motion.li variants={liVariant}><Link className={`${pathname === "/contact" && "nav-others"} nav-active px-3 py-3`} href="/contact">Contact Us</Link></motion.li>
                             <motion.li variants={liVariant} className="relative">
-                                <input className="pl-5 md:pl-10 h-12 md:h-14 text-black" type="text" name="" id="" placeholder="Search" />
+                                <input className="w-full pl-5 md:pl-10 h-10 md:h-14 text-black" type="text" name="" id="" placeholder="Search" />
                                 <IoMdSearch className="absolute left-5 top-1/2 -translate-y-1/2" size={20} />
                             </motion.li>
                            { user ?
-                           ( <motion.li whileTap={{scale: 0.8}} initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 5}}>
+                           ( <motion.li variants={liVariant} whileTap={{scale: 0.8}}>
                                 <button onClick={logOut} className="w-full rounded-sm border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-red-500 my-3 py-2 px-2 font-semibold text-white text-base md:text-base">LOGOUT</button>
                             </motion.li>):
                             (
                                 <>
-                                    <Link href="/login">
-                                        <motion.li whileTap={{scale: 0.8}} initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 3, duration: 3}}>
-                                            <button className="w-full rounded-sm border-2 hover:bg-transparent hover:text-black duration-300 py-2 px-2 font-semibold text-white text-base md:text-base border-[#7F6000]">LOGIN</button>
-                                        </motion.li>
-                                    </Link>
-                                    <Link href="/createAccount">
-                                        <motion.li whileTap={{scale: 0.8}} initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 3, duration: 3}}>
-                                            <button className="w-full rounded-sm border-2 border-black hover:bg-transparent hover:text-black duration-300 py-2 px-2 font-semibold text-white text-base md:text-base bg-[#7F6000]">SIGNUP</button>
-                                        </motion.li>
-                                    </Link>
+                                    <motion.li variants={liVariant} whileTap={{scale: 0.8}}>
+                                        <Link href="/login">
+                                            <button className="w-full rounded-sm border-2 hover:bg-[#7F6000] hover:text-white duration-300 py-2 px-2 font-semibold text-white text-base md:text-base border-[#7F6000]">LOGIN</button>
+                                        </Link>
+                                    </motion.li>
+                                    <motion.li variants={liVariant} whileTap={{scale: 0.8}}>
+                                        <Link href="/createAccount">
+                                            <button className="w-full rounded-sm border-2 border-[#7F6000] hover:bg-transparent hover:text-white duration-300 py-2 px-2 font-semibold text-white text-base md:text-base bg-[#7F6000]">SIGNUP</button>
+                                        </Link>
+                                    </motion.li>
                                 </>
                             )}
                         </motion.ul>

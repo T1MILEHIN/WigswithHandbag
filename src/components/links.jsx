@@ -27,7 +27,7 @@ const Links = () => {
     };
 
     return (
-        <ul className="flex items-center gap-8 h-fit">
+        <ul className="flex items-center gap-1 xl:gap-7 h-fit text-sm">
             <div onMouseLeave={() => handleSetSelected(null)} className="relative flex items-center gap-3 h-fit">
                 {
                     TABS.map((t) => {

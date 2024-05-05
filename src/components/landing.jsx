@@ -37,7 +37,9 @@ const Landing = () => {
               <Link href="/wigs">
                 <motion.button whileTap={{scale: 0.8}} whileHover={{scale:1.1}} className="md:px-5 px-2 py-3 md:py-4 text-black bg-white">SHOP NOW</motion.button>
               </Link>
-              <button className="md:px-5 px-2 py-3 md:py-4 bg-transparent text-white border-2 border-white">BOOK APPOINTMENT</button>
+              <Link href="/book_appointment">
+                <motion.button whileTap={{scale: 0.8}} whileHover={{scale:1.1}} className="md:px-5 px-2 py-3 md:py-4 bg-transparent text-white border-2 border-white">BOOK APPOINTMENT</motion.button>
+              </Link>
             </div>
           </div>
         </section>

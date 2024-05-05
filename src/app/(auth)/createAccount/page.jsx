@@ -47,7 +47,7 @@ const Page = () => {
     return (
         <>
             <section className="bg-black min-h-screen flex justify-center items-center">
-                <div className="md:w-[400px] p-5 bg-white rounded-sm">
+                <div className="w-[90%] md:w-[400px] p-5 bg-white rounded-sm">
                     <div className="flex items-center justify-between">
                         <div>
                             Logo

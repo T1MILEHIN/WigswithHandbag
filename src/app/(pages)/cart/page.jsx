@@ -12,6 +12,10 @@ import { FaCheck, FaExclamation } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import Link from "next/link";
+
+import { FaPlus } from "react-icons/fa";
+import { FaMinus } from "react-icons/fa";
 
 
 
@@ -64,41 +68,58 @@ const Page = () => {
         setCartItem(updatedCart);
         localStorage.setItem("cart-item", JSON.stringify(updatedCart))
     };
+    const increaseQuantity = (cartItem)=> {
+        setCartItem(prev=> (
+            prev.map((item)=> item.id === cartItem.id ? { ...item, quantity: item.quantity + 1 } : item)
+        ))
+    }
+    const decreaseQuantity = (cartItem)=> {
+        setCartItem(prev=> (
+            prev.map((item)=> item.id === cartItem.id && item.quantity > 0 ? { ...item, quantity: item.quantity - 1 } : cartItem.quantity === 0  ? removeItem(cartItem.id) : item)
+        ))
+    }
     return (
-        <div className={`${vollkorn.className} min-h-screen md:px-10 px-2 pt-16`}>
-            <h1 className="text-xl md:text-4xl font-black">SHOPPING CART</h1>
+        <div className={`${vollkorn.className} min-h-screen pt-10`}>
+            <h1 className="text-center text-xl md:text-4xl font-black">SHOPPING CART</h1>
             <div>
                 <p className="font-semibold text-md flex items-end gap-1 my-3"><p className="font-black text-xl">{cartItem.length}</p> {cartItem.length > 1 ? "ITEMS" : "ITEM"} in cart </p>
             </div>
-            <section className="grid md:grid-cols-3 grid-cols-1 gap-10">
-                <div className="cart-items md:col-span-2">
+            <section className="">
+                <div className="cart-items">
                     <AnimatePresence popLayout="popLayout">
                         {cartItem.length > 0 ? cartItem.map((item) => (
-                            <motion.div exit={{ y: -20, opacity: 0 }} transition={{ type: "spring", duration: 0.3 }} key={item.id} className="py-4 px-2">
+                            <motion.div exit={{ y: -20, opacity: 0 }} transition={{ type: "spring", duration: 0.3 }} key={item?.id} className="py-4 px-2">
                                 <div className="flex items-center gap-2 md:gap-4">
                                     <div>
-                                        <Image src={item.image} width={50} height={50} className="aspect-square object-cover rounded-md" alt="" />
+                                        <Image src={item?.image} width={50} height={50} className="aspect-square object-cover rounded-md" alt="" />
                                     </div>
-                                    <div className="md:flex-[5]">
-                                        <p className="text-sm md:text-base font-black">{item.name}</p>
-                                        <p className="text-xs">{item.intro}</p>
-                                        <p className="text-xs font-medium line-clamp-1">{item.description}</p>
+                                    <div className="md:flex-[4]">
+                                        <p className="text-sm md:text-base font-black">{item?.name}</p>
                                     </div>
-                                    <div className="flex gap-2 md:gap-4 md:flex-1">
-                                        <button onClick={() => removeItem(item.id)} className="font-bold text-xs text-BLUE">REMOVE</button>
-                                        <p className="font-black">${item.price}</p>
+                                    <div className={`md:flex-1 flex items-center gap-4 text-sm`}>
+                                        <motion.span onClick={()=> decreaseQuantity(item)} whileTap={{ scale: 0.95 }} className="curser-pointer"><FaMinus /></motion.span>
+                                        <span className={vollkorn.className}>{item?.quantity}</span>
+                                        <motion.span onClick={()=> increaseQuantity(item)} whileTap={{ scale: 0.95 }} className="cursor-pointer"><FaPlus /></motion.span>
+                                    </div>
+                                    <div className="flex justify-between gap-2 md:gap-4 md:flex-1">
+                                        <p className="font-black">${(item?.price * item.quantity)}</p>
+                                        <button onClick={() => removeItem(item?.id)} className="font-bold text-xs text-[#7F6000]"><FaXmark color="#7F6000"/></button>
                                     </div>
                                 </div>
+
                             </motion.div>
-                        )) : <h1 className="col-span-3 flex justify-center items-center font-bold text-base md:text-xl">NO ITEM IN YOUR CART</h1>}
+                        )) : <h1 className="flex justify-center items-center font-bold text-base md:text-xl">NO ITEM IN YOUR CART</h1>}
                     </AnimatePresence>
+                    <Link href="/wigs">
+                        <p className="underline text-[#7F6000]">Continue Shopping</p>
+                    </Link>
                 </div>
                 <div className="mb-3">
                     <div className="my-8">
                         <h1 className="text-slate-600 text-sm font-bold">TOTAL:</h1>
-                        <p className="font-black text-2xl">${cartItem.map((price) => price.price).reduce((acc, cur) => acc + cur, 0)}</p>
+                        <p className="font-black text-2xl">${cartItem?.map((item) => item.price * item.quantity).reduce((acc, cur) => acc + cur, 0)}</p>
                     </div>
-                    <button onClick={checkOut} className="duration-300 bg-[#7F6000] hover:bg-white border-2 border-[#7F6000] hover:text-[#7F6000] w-full text-white font-bold py-3 rounded-xl">CHECKOUT</button>
+                    <button onClick={checkOut} className="duration-300 bg-[#7F6000] hover:bg-white border-2 border-[#7F6000] hover:text-[#7F6000] w-full text-white font-bold py-3">CHECKOUT</button>
                 </div>
             </section>
         </div>

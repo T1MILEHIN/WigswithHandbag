@@ -19,8 +19,8 @@ export default function Layout({ children }) {
       <head>
       <link rel="icon" href="icon.jpeg" type="jpeg" sizes="any" />
       </head>
-      <body className={vollkorn.className}>
-        <div className="">
+      <body>
+        <div className={vollkorn.className}>
           <section>
             <AuthProvider>
               <CartProvider>

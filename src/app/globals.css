@@ -200,12 +200,13 @@ div.landing-bg::before {
 
 @media only screen and (max-width:1023px) {
   .slider div.splide__arrows.splide__arrows--ltr > button:first-child {
-    margin-left : 50%;
+    top: 0;
+    transform: translateY(0);
+    margin-left : 60%;
   }
 }
 
 .slider div.splide__arrows.splide__arrows--ltr > button:last-child {
-  /* border: 2px solid green; */
   top: 0;
   right: 0;
   transform: translateY(0);
