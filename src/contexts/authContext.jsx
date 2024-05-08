@@ -1,43 +1,39 @@
-"use client"
+"use client";
+
 import { useState, useEffect, createContext } from "react";
-import { Toaster, toast } from 'sonner';
+import { Toaster, toast } from "sonner";
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
-import { auth } from '@/firebase.config';
-import { useRouter } from 'next/navigation';
+import { auth } from "@/firebase.config";
+import { useRouter } from "next/navigation";
 import AuthLoader from "@/components/authLoader";
 
-export const AuthContext = createContext({})
+export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const router = useRouter();
+  const [user, setUser] = useState({}); // Initial empty state
+  const [userToken, setUserToken] = useState(""); // Initial empty state
+  const [loading, setLoading] = useState(false); // Optional for SSR
 
-  const [user, setUser] = useState(() => {
-    // Check for window and localStorage existence
-    if (typeof window !== 'undefined' && localStorage) {
+  // Fetch data from localStorage on component mount (optional for SSR)
+  useEffect(() => {
+    if (localStorage) {
       try {
-        return localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {};
+        setUser(
+          localStorage.getItem("user")
+            ? JSON.parse(localStorage.getItem("user"))
+            : {}
+        );
+        setUserToken(
+          localStorage.getItem("token")
+            ? JSON.parse(localStorage.getItem("token"))
+            : ""
+        );
       } catch (error) {
-        console.error("Error parsing user data from localStorage:", error);
-        return {}; // or any default value
+        console.error("Error parsing data from localStorage:", error);
       }
     }
-    return {}; // or any initial value you prefer (for SSR)
-  });
-
-  const [userToken, setUserToken] = useState(() => {
-    if (typeof window !== 'undefined' && localStorage) {
-      try {
-        return localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : '';
-      } catch (error) {
-        console.error("Error parsing token data from localStorage:", error);
-        return ''; // or any default value
-      }
-    }
-    return ''; // or any initial value you prefer (for SSR)
-  });
-
-  // Consider using a loading state for SSR
-  const [loading, setLoading] = useState(false); // Optional for SSR handling
+  }, []); // Empty dependency array to run only on mount
 
   const googlePopUp = async () => {
     const provider = new GoogleAuthProvider();
@@ -48,7 +44,10 @@ export const AuthProvider = ({ children }) => {
 
         toast.success("Welcome to EvaTouch Beauty!");
 
-        localStorage.setItem("token", JSON.stringify(response?.user.accessToken));
+        localStorage.setItem(
+          "token",
+          JSON.stringify(response?.user.accessToken)
+        );
         localStorage.setItem("user", JSON.stringify(response?.user));
 
         router.push("/");
