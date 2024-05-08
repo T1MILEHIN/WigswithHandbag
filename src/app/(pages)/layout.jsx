@@ -1,3 +1,4 @@
+"use client"
 import "../globals.css"
 import { Vollkorn, Poppins } from "next/font/google";
 

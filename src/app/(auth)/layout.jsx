@@ -1,3 +1,4 @@
+"use client"
 import { Vollkorn } from "next/font/google";
 import "../globals.css";
 import { AuthProvider } from "@/contexts/authContext";

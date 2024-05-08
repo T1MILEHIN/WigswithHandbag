@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <>
       <div className="">
-        {/* <Header /> */}
-        {/* <Landing /> */}
+        <Header />
+        <Landing />
       </div>
       <Footer />
     </>

@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import gallery_one from "../../images/gal1.png"
 import gallery_two from "../../images/gal2.png"
