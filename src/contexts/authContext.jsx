@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import AuthLoader from "@/components/authLoader";
 
 export const AuthContext = createContext({})
+
 export const AuthProvider = ({children}) => {
     const router = useRouter()
     const [user, setUser] = useState(()=> localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {});
@@ -19,9 +20,12 @@ export const AuthProvider = ({children}) => {
             await signInWithPopup(auth, provider).then((response)=> {
                 setUser(response?.user)
                 setUserToken(response?.user.accessToken)
+    
                 toast.success("Welcome to EvaTouch Beauty!")
+                
                 localStorage.setItem("token", JSON.stringify(response?.user.accessToken))
                 localStorage.setItem("user", JSON.stringify(response?.user))
+
                 router.push("/")
             })
         } catch (error) {
