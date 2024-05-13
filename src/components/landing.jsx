@@ -25,37 +25,26 @@ export const metadata ={
 const Landing = () => {
   return (
     <>
-      <div className="landing-bg border-2 ">
-        <div className="min-h-screen -z-[3] grid place-items-center absolute w-full">
+      <div className="landing-bg">
+        <div className="min-h-screen -z-[3] absolute w-full">
           <DisplayHome />
         </div>
         <section className="flex items-center md:flex-row flex-col justify-center gap-16 min-h-screen py-32 md:py-10 md:my-10">
           <div className={`md:px-0 px-4 w-fit mx-auto md:text-center text-left ${poppins.className}`}>
             <h1 className="font-bold text-3xl md:text-4xl">Create Your Own Unique Sense of Style</h1>
-            <p className="text-lg md:text-2xl my-4">The ultimate feel and look Good store</p>
+            <p className="text-lg md:text-2xl my-1 lg:my-4">The ultimate feel and look Good store</p>
             <div className="text-base md:text-xl flex items-center gap-3 md:gap-4 font-bold w-fit md:mx-auto">
               <Link href="/wigs">
-                <motion.button whileTap={{scale: 0.8}} whileHover={{scale:1.1}} className="md:px-5 px-2 py-3 md:py-4 text-black bg-white">SHOP NOW</motion.button>
+                <motion.button whileTap={{scale: 0.8}} whileHover={{scale:1.1}} className="md:px-5 px-2 py-3 md:py-4 text-black bg-white lg:text-base text-sm ">SHOP NOW</motion.button>
               </Link>
               <Link href="/book_appointment">
-                <motion.button whileTap={{scale: 0.8}} whileHover={{scale:1.1}} className="md:px-5 px-2 py-3 md:py-4 bg-transparent text-white border-2 border-white">BOOK APPOINTMENT</motion.button>
+                <motion.button whileTap={{scale: 0.8}} whileHover={{scale:1.1}} className="md:px-5 px-2 py-3 md:py-4 bg-transparent text-white border-2 border-white lg:text-base text-sm ">BOOK APPOINTMENT</motion.button>
               </Link>
             </div>
           </div>
         </section>
       </div>
-      <LandingParallax />
       <Options />
-      <section className="md:my-32 my-10 md:px-20 px-4 ">
-        <div className="relative flex justify-between my-4">
-          <div>
-            <h1 className={`${poppins.className} font-bold text-2xl md:text-4xl`}>New Arrivals</h1>
-            <p className={`${vollkorn.className} text-base md:text-lg`}>Shop our range of products and embrace your unique radiance</p>
-          </div>
-          {/* <SlideController /> */}
-        </div>
-        <Slider />
-      </section>
 
       <section className="md:my-32 my-10 md:px-20 px-4 ">
         <div className="relative flex justify-between my-4">

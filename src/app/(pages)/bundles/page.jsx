@@ -143,7 +143,7 @@ const Page = () => {
 
     return (
         <div className="">
-            <h1 className="my-2 text-center font-bold text-xl md:text-3xl text-[#7F6000]">Bundles</h1>
+            <h1 className="my-2 text-center font-bold text-xl md:text-3xl text-black">Bundles</h1>
             <div className="flex flex-col gap-5 my-4">
                 <div className="flex items-center gap-2">
                     <label htmlFor="image">

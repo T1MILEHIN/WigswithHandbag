@@ -5,14 +5,14 @@
 div.landing-bg {
   position: relative;
   z-index: 2;
+  min-height: 100vh;
 }
 
 div.landing-bg::before {
   content: "";
   position: absolute;
   inset: 0;
-  /* background: #daa520a6; */
-  background: #c28d7696;
+  background: #e8dfd683;
   z-index: -1;
 }
 
@@ -145,13 +145,21 @@ div.landing-bg::before {
   .bg-image {
     display: flex;
     gap: 20px;
+    min-height: 100vh;
   }
   
   .bg-image>div {
     flex: 0 0 33.333%;
-    width: 300px;
+    width: 100%;
+    height: 100%;
     aspect-ratio: 1/1;
     overflow: hidden;
+  }
+  .bg-image>div:nth-child(2) {
+    margin: auto 0;
+  }
+  .bg-image>div:nth-child(3) {
+      margin-top: auto;
   }
   
   .bg-image div img {
@@ -190,7 +198,6 @@ div.landing-bg::before {
 /* pagination css */
 @media only screen and (min-width:1024px) {
   .slider div.splide__arrows.splide__arrows--ltr > button:first-child {
-    /* border: 2px solid red; */
     right: 0;
     top: 0;
     transform: translateY(0);

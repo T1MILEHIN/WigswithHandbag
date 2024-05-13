@@ -1,8 +1,10 @@
 "use client"
-import { Vollkorn } from "next/font/google";
+
+import { Vollkorn, Poppins } from "next/font/google";
 const vollkorn = Vollkorn({ subsets: ["latin"]});
+const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"]})
 
-
+import Slider from "@/components/slider";
 import { useState, useEffect, useContext } from "react";
 import upload from "../../images/upload.webp"
 import Image from 'next/image'
@@ -143,7 +145,16 @@ const Page = () => {
 
   return (
     <div className="">
-      <h1 className="my-2 text-center font-bold text-xl md:text-3xl text-[#7F6000]">Wigs</h1>
+      <h1 className="my-2 text-center font-bold text-xl md:text-3xl text-black">Wigs</h1>
+      <section className="">
+        <div className="relative flex justify-between my-4">
+          <div>
+            <h1 className={`${poppins.className} font-bold text-2xl md:text-4xl`}>New Arrivals</h1>
+            <p className={`${vollkorn.className} text-base md:text-lg`}>Shop our range of products and embrace your unique radiance</p>
+          </div>
+        </div>
+        <Slider />
+      </section>
       <div className="flex flex-col gap-5 my-4">
         <div className="flex items-center gap-2">
           <label htmlFor="image">

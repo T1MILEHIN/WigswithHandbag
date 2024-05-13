@@ -56,8 +56,8 @@ const imageVariant3 = {
 export default function DisplayHome() {
     return (
         <Parallax
-            translateY={["0px", "150px"]}
-            speed={15}
+            translateY={["0px", "100px"]}
+            speed={5}
             easing="easeInQuad"
             className='overflow-hidden'>
             <div>

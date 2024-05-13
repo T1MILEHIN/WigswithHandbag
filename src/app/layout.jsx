@@ -22,7 +22,7 @@ export default function Layout({ children }) {
       </head>
       <body>
         <div className={vollkorn.className}>
-          <section>
+          <section className="bg-[#C9BCAC]">
             <AuthProvider>
               <CartProvider>
                 <Providers>

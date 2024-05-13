@@ -102,15 +102,15 @@ const Header = () => {
         }
     }
     return (
-        <header className={` ${vollkorn.className} shadow-sm lg:px-20 px-4 bg-white fixed w-full left-0 top-0 flex items-center justify-between z-[9999]`}>
+        <header className={` ${vollkorn.className} shadow-sm lg:px-20 px-4 bg-[#C9BCAC] fixed w-full left-0 top-0 flex items-center justify-between z-[9999]`}>
             <div className="xl:block hidden"><Link href="/"><Image src={LOGO} width={60} height={60} style={{width: "auto"}} alt="LOGO" /></Link></div>
-            <div className="xl:hidden block"><Link href="/"><Image src={LOGO} width={60} height={60} style={{width: "auto"}} alt="LOGO" /></Link></div>
+            <div className="xl:hidden block"><Link href="/"><Image src={LOGO} width={40} height={40} style={{width: "auto"}} alt="LOGO" /></Link></div>
             <nav className="xl:block hidden">
                 <Links />
             </nav>
             <div className="md:flex hidden items-center gap-4 md:gap-10">
                 <div className="relative">
-                    <input className="pl-10 border-2 border-black h-9 md:h-12" type="text" placeholder="Search" />
+                    <input className="pl-10 border-2 border-black h-9 md:h-12 bg-transparent" type="text" placeholder="Search" />
                     <IoMdSearch className="absolute left-5 top-1/2 -translate-y-1/2" size={20} />
                 </div>
                 {!cartItem.length ?
@@ -118,7 +118,7 @@ const Header = () => {
                     <DrawerTrigger>
                         <div className="relative">
                             <MdOutlineShoppingBag size={30} />
-                            <span className="w-6 aspect-square flex justify-center items-center bg-[#7F6000] text-white absolute -top-1 -right-1 rounded-full">{cartItem.length}</span>
+                            <span className="w-6 aspect-square flex justify-center items-center bg-black text-white absolute -top-1 -right-1 rounded-full">{cartItem.length}</span>
                         </div>
                     </DrawerTrigger>
                     <DrawerContent>
@@ -145,24 +145,34 @@ const Header = () => {
                 </Link>
                 }
                 <div>
-                    <FaUser className="cursor-pointer" color="#7F6000" onClick={()=>profile()} size={20} />
+                    <FaUser className="cursor-pointer" color="#000" onClick={()=>profile()} size={20} />
                 </div>
-                {user && <button onClick={logOut} className="lg:block hidden w-full rounded-sm border-2 border-[#7F6000] hover:bg-transparent hover:text-[#7F6000] duration-300 bg-[#7F6000] py-2 px-2 font-semibold text-white text-base md:text-base">LOGOUT</button>}
+                {user && <button onClick={logOut} className="lg:block hidden w-full rounded-sm border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-black py-2 px-2 font-semibold text-white text-base md:text-base">LOGOUT</button>}
             </div>
             <motion.div className={`${nav ? "static" : "relative"} cursor-pointer bg-black p-2 rounded-md lg:hidden block`}>
                 <AnimatePresence>
                     {nav ?
-                        <div className="z-[9999999] text-xl md:text-2xl relative border-2 border-black" onClick={() => setNav(prev => !prev)}>
+                        <div className="z-[9999999] text-base lg:text-xl md:text-2xl relative border-2 border-black" onClick={() => setNav(prev => !prev)}>
                             <FaXmark color="white" size={20} />
                         </div>
                         :
-                        <div className="z-[9999999] text-xl md:text-2xl relative border-2 border-black" onClick={() => setNav(prev => !prev)}>
-                            <FaBars color="white" size={20} />
+                        <div>
+                            <div className="z-[9999999] text-base lg:text-xl md:text-2xl relative border-2 border-black" onClick={() => setNav(prev => !prev)}>
+                                <FaBars color="white" size={20} />
+                            </div>
                         </div>
                     }
                 </AnimatePresence>
-                <motion.div variants={divVariant} initial="initial" animate={nav ? "final" : "initial"} className={`fixed ${nav ? "" : ""} inset-0 bg-black text-white origin-top-right duration-300`}>
+                <motion.div variants={divVariant} initial="initial" animate={nav ? "final" : "initial"} className={`min-h-fit fixed ${nav ? "" : ""} inset-0 bg-black text-white origin-top-right duration-300`}>
                         <motion.ul variants={ulVariant} className="font-bold md:font-semibold p-4 md:text-xl min-h-screen flex flex-col justify-between">
+                            <motion.li>
+                                <Link href="/cart">
+                                    <div className="relative">
+                                        <MdOutlineShoppingBag size={30} color="white" />
+                                        <span className="w-6 aspect-square flex justify-center items-center bg-white text-black absolute left-0 top-0 rounded-full">{cartItem.length}</span>
+                                    </div>
+                                </Link>
+                            </motion.li>
                             <motion.li onClick={() => openSubNav()} variants={liVariant}><span className="relative px-3 flex items-center gap-1">Shop<FaChevronDown /></span>
                                    { subNav &&
                                     <motion.ul initial={{height: 0, opacity: 0}} animate={{height: "100%", opacity: 1}} exit={{x: "100px", opacity: 0}} className={`z-10 absolute top-10 right-20 flex flex-col gap-5 py-2 px-4 transition-all duration-300 overflow-hidden`}>
