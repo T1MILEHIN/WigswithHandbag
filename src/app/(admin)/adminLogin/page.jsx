@@ -17,7 +17,7 @@ const page = () => {
                         </Link>
                     </div>
                     <p className="font-bold">Welcome Admin!</p>
-                    <p className="text-sm md:text-base text-slate-700 font-medium">Enter Your details to continue</p>
+                    <p className="text-sm md:text-base text-slate-700 font-medium">Welcome Admin</p>
                     <form>
                         <div className="my-4">
                             <label className="font-bold" htmlFor="email">Email Address

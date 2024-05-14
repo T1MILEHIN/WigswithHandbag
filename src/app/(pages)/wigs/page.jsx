@@ -167,29 +167,31 @@ const Page = () => {
         <input onChange={handleInput} value={data.discount} name="discount" className="w-full pl-5 border-2 border-black h-9 md:h-10" type="number" placeholder="discount" />
         <motion.button onClick={() => postWigs()} disabled={perc !== null && perc < 100} whileTap={{ scale: 0.95 }} className="bg-black text-white rounded-sm p-2 disabled:bg-red-600 disabled:cursor-not-allowed">UPLOAD</motion.button>
       </div>
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-0">
         {loadingWigs && <div className="lg:col-span-3 md:col-span-2 col-span-1"><Loading /></div>}
         {(!loadingWigs && allWigs) &&
         allWigs?.map((wig, index) => (
-          <div key={index} className="w-full aspect-square">
+          <div key={index} className="w-full aspect-square lg:p-3">
             <div className="relative group overflow-hidden rounded-md">
-              <LazyLoadImage effect="blur" style={{width: "auto"}} src={wig.image} alt={wig.name} className="w-full rounded-md" />
-              <div className="rounded-md absolute top-0 bottom-2 left-0 right-0 bg-black bg-opacity-60 invisible opacity-0 group-hover:visible group-hover:opacity-100 duration-300 flex justify-center items-center">
-                <motion.button onClick={() => addToCart(quantity.filter((item)=> item.quantity !== 0).find((item)=> item.id === wig.id), setQuantity)} whileTap={{ scale: 0.8 }} className={`${vollkorn.className} shadow-lg bg-white text-black px-2 py-1 rounded-sm -translate-y-20 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 duration-300 font-bold`}>ADD TO CART</motion.button>
+              <LazyLoadImage effect="blur" src={wig.image} alt={wig.name} className="w-screen rounded-md" />
+              <div className="rounded-md absolute top-0 bottom-2 left-0 right-0 bg-black bg-opacity-60 invisible opacity-0 group-hover:visible group-hover:opacity-100 duration-300 lg:flex hidden  justify-center items-center">
+                <motion.button onClick={() => addToCart(quantity.filter((item)=> item.quantity !== 0).find((item)=> item.id === wig.id), setQuantity)} whileTap={{ scale: 0.8 }} className={`${poppins.className} shadow-lg bg-white text-black px-3 py-2 rounded-sm -translate-y-20 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 duration-300 font-medium`}>ADD TO CART</motion.button>
               </div>
             </div>
             <div className='py-2 flex items-center justify-between'>
               <div className="flex flex-col gap-2">
-                <h2 className='font-semibold text-sm'>{wig.name}</h2>
+                <h2 className='font-semibold text-base'>{wig.name}</h2>
                 <p className='font-bold text-xs'>${wig.price}.00</p>
               </div>
               <div className={`flex items-center gap-2 md:text-2xl`}>
                 <motion.span onClick={()=> decrease(wig)} whileTap={{scale: 0.90}} className="font-bold cursor-pointer"><FaMinus /></motion.span>
-                <span className={vollkorn.className}>{quantity?.find((item)=> item.id === wig.id)?.quantity || 0}</span>
+                <span className={poppins.className}>{quantity?.find((item)=> item.id === wig.id)?.quantity || 0}</span>
                 <motion.span onClick={()=> increase(wig)} whileTap={{scale: 0.90}} className="font-bold cursor-pointer"><FaPlus /></motion.span>
               </div>
             </div>
-           
+            <div className="lg:hidden block">
+              <motion.button onClick={() => addToCart(quantity.filter((item)=> item.quantity !== 0).find((item)=> item.id === wig.id), setQuantity)} whileTap={{ scale: 0.8 }} className={`${poppins.className} w-full bg-white text-black px-3 py-2 rounded-sm duration-300 font-medium`}>ADD TO CART</motion.button>
+            </div>
           </div>
         ))}
       </section>

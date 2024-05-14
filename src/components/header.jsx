@@ -102,7 +102,7 @@ const Header = () => {
         }
     }
     return (
-        <header className={` ${vollkorn.className} shadow-sm lg:px-20 px-4 bg-[#C9BCAC] fixed w-full left-0 top-0 flex items-center justify-between z-[9999]`}>
+        <header className={`${vollkorn.className} lg:px-20 px-4 bg-[#E8DFD6] fixed w-full left-0 top-0 flex items-center justify-between z-[9999]`}>
             <div className="xl:block hidden"><Link href="/"><Image src={LOGO} width={60} height={60} style={{width: "auto"}} alt="LOGO" /></Link></div>
             <div className="xl:hidden block"><Link href="/"><Image src={LOGO} width={40} height={40} style={{width: "auto"}} alt="LOGO" /></Link></div>
             <nav className="xl:block hidden">

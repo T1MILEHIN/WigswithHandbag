@@ -56,12 +56,12 @@ const imageVariant3 = {
 export default function DisplayHome() {
     return (
         <Parallax
-            translateY={["0px", "100px"]}
-            speed={5}
+            translateY={["0px", "50px"]}
+            speed={15}
             easing="easeInQuad"
             className='overflow-hidden'>
             <div>
-                <motion.div variants={containerVariant} initial="initial" animate="animate" className="overflow-hidden bg-image">
+                <motion.div variants={containerVariant} initial="initial" animate="animate" className="overflow-hidden bg-image py-10">
                     <motion.div variants={imageVariant1} className="lg:block hidden">
                         <Image src={landing1} width={300} height={300} alt="landing-img" className="object-cover" />
                     </motion.div>

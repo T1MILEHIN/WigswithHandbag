@@ -39,6 +39,7 @@ export const CartProvider = ({ children }) => {
       toast.success(`More of ${data.name} has been added to your cart`, {
         icon: <FaCheck color="green" />
       });
+      console.log(quantity)
       setQuantity([]);
     }
   };

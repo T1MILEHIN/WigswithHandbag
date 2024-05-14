@@ -4,6 +4,7 @@ import { Vollkorn, Poppins } from "next/font/google";
 import Image from 'next/image';
 import about_one from "../../images/about2.png"
 import about_two from "../../images/about1.png"
+import client from "../../images/landing2.jpg"
 
 const vollkorn = Vollkorn({ subsets: ["latin"]})
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"]}, )
@@ -15,11 +16,11 @@ export const metadata = {
 const AboutUs = () => {
   return (
     <section className=''>
-        <div className='flex items-center lg:flex-row flex-col gap-10 md:gap-20 min-h-screen'>
+        <div className='flex items-center lg:flex-row flex-col gap-3 lg:gap-10 md:gap-20 min-h-screen'>
             <div className="">
                 <Image placeholder='blur' src={about_one} width={1000} height={1000} alt='about-img' />
             </div>
-            <div className="mt-36">
+            <div className="lg:mt-36">
                 <Image placeholder='blur' src={about_two} width={1000} height={1000} alt='about-img' />
             </div>
         </div>
@@ -29,11 +30,10 @@ const AboutUs = () => {
         </div>
 
         <div className='flex gap-10 items-center md:flex-row flex-col my-10 md:my-10'>
-            
-            <div className="border-2 flex-1 w-full aspect-square bg-black"></div>
+            <Image placeholder='blur' src={client} width={300} height={300} alt='about-img' className='flex-1 w-full aspect-square' />
             <div className='flex-1'>
                 <h1 className='my-3 font-bold text-3xl md:text-5xl'><span className={poppins.className}>Meet the Genius Behind the Brand</span></h1>
-                <p className=' font-medium md:font-semibold text-sm md:text-[16px]'><span className={vollkorn.className}><span className='font-black'>Evodie Ngoy</span> has worked in the hair and makeup space for 9 years. She has experience styling hair for all types of occasions and makeup application from birthday makeup to bridal makeup. As the Founder and CEO of Evatouch Beauty, her mission is to ensure that all race, age and gender all over the world no matter the skin type and undertones can enjoy affordable luxury by providing innovative and quality products to cater to all beauty needs locally and across the border</span></p>
+                <p className=' font-medium md:font-mediun text-sm md:text-[20px]'><span className={vollkorn.className}><span className='font-black'>Evodie Ngoy</span> has worked in the hair and makeup space for 9 years. She has experience styling hair for all types of occasions and makeup application from birthday makeup to bridal makeup. As the Founder and CEO of Evatouch Beauty, her mission is to ensure that all race, age and gender all over the world no matter the skin type and undertones can enjoy affordable luxury by providing innovative and quality products to cater to all beauty needs locally and across the border</span></p>
             </div>
         </div>
     </section>

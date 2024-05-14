@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 
 const Page = () => {
     const router = useRouter()
-    const { loading, setLoading, setUser, userToken, setUserToken, googlePopUp } = useContext(AuthContext)
+    const { user, userToken, setLoading, setUser, setUserToken, googlePopUp } = useContext(AuthContext)
     const schema = yup.object().shape({
         email: yup.string().email("Invalid email address").required("Email is required"),
         password: yup.string().required("Password is required"),
@@ -32,10 +32,10 @@ const Page = () => {
     const logIn = (data)=> {
         setLoading(true)
         signInWithEmailAndPassword(auth, data.email, data.password).then((response)=> {
-            setUser(response?.user)
-            setUserToken(response?.user.accessToken)
-            localStorage.setItem("token", JSON.stringify(response?.user.accessToken))
-            localStorage.setItem("user", JSON.stringify(response?.user))
+            localStorage.setItem("token", JSON.stringify(response?.user.accessToken));
+            localStorage.setItem("user", JSON.stringify(response?.user));
+            setUser(user);
+            setUserToken(userToken);
             toast.success("Welcome to EvaTouch Beauty!")
             reset();
             setLoading(false)

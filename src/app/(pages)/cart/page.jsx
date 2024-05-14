@@ -4,7 +4,7 @@ const vollkorn = Vollkorn({ subsets: ["latin"] })
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"] },)
 import React from 'react';
 import Image from 'next/image';
-import { useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { AuthContext } from "@/contexts/authContext";
 import { CartContext } from '@/contexts/cartContext';
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,17 +13,35 @@ import { FaXmark } from "react-icons/fa6";
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import Link from "next/link";
-
+import { db } from "@/firebase.config"
+import { storage } from '@/firebase.config';
+import { ref } from "firebase/storage";
+import { collection, getDocs } from "firebase/firestore";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
-
-
-
 
 const Page = () => {
     const router = useRouter()
     const { cartItem, setCartItem } = useContext(CartContext);
     const {user} = useContext(AuthContext)
+
+    useEffect(()=> {
+        const fetchCartWig = async()=> {
+            // const wigsAndBundles = [];
+            // const queryWigSnapshot = await getDocs(collection(db, "wigs"));
+            // const queryBundleSnapshot = await getDocs(collection(db, "bundles"));
+            // queryWigSnapshot.forEach((doc) => {
+            //     // console.log(doc.data());
+            //     wigsAndBundles.push(doc.data())
+            // });
+            // queryBundleSnapshot.forEach((doc) => {
+            //     // console.log(doc.data());
+            //     wigsAndBundles.push(doc.data())
+            // });
+            // console.log(wigsAndBundles.find((item)=> item.id === ));
+        }
+        fetchCartWig();
+    }, [])
 
     const checkOut = () => {
         if (!user) {
@@ -80,7 +98,7 @@ const Page = () => {
     }
     return (
         <div className={`${vollkorn.className} min-h-screen pt-10`}>
-            <h1 className="text-center text-xl md:text-4xl font-black">SHOPPING CART</h1>
+            <h1 className="text-xl md:text-4xl font-black">SHOPPING CART</h1>
             <div>
                 <p className="font-semibold text-md flex items-end gap-1 my-3"><p className="font-black text-xl">{cartItem.length}</p> {cartItem.length > 1 ? "ITEMS" : "ITEM"} in cart </p>
             </div>
@@ -103,7 +121,7 @@ const Page = () => {
                                     </div>
                                     <div className="flex justify-between gap-2 md:gap-4 md:flex-1">
                                         <p className="font-black">${(item?.price * item.quantity)}</p>
-                                        <button onClick={() => removeItem(item?.id)} className="font-bold text-xs text-[#7F6000]"><FaXmark color="#7F6000"/></button>
+                                        <button onClick={() => removeItem(item?.id)} className="font-bold text-2xl text-[#7F6000]"><FaXmark color="#7F6000"/></button>
                                     </div>
                                 </div>
 

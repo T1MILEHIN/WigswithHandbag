@@ -49,7 +49,6 @@ export const AuthProvider = ({ children }) => {
           JSON.stringify(response?.user.accessToken)
         );
         localStorage.setItem("user", JSON.stringify(response?.user));
-
         router.push("/");
       });
     } catch (error) {
@@ -67,7 +66,7 @@ export const AuthProvider = ({ children }) => {
       signOut(auth);
       setLoading(false); // Optional for UI indication
       toast.success("Logged Out Successfully", {
-        position: "top-right",
+        duration: 2000
       });
     } catch (error) {
       console.log(error);
