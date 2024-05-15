@@ -1,11 +1,29 @@
 "use client"
 import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation';
 import { FaXmark } from "react-icons/fa6";
 import LOGO from "../../images/eva.png";
 import Image from 'next/image';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
-const page = () => {
+const Page = () => {
+    
+    const schema = yup.object().shape({
+        email: yup.string().email("Invalid email address").required("Email is required"),
+        password: yup.string().required("Password is required"),
+    });
+
+    const { register, handleSubmit, formState: { errors }, reset} = useForm({
+        resolver: yupResolver(schema),
+    });
+    const adminLogIn = (data)=> {
+
+    }
+
     return (
         <>
             <section className="bg-black min-h-screen flex justify-center items-center">
@@ -20,16 +38,16 @@ const page = () => {
                     </div>
                     <p className="font-bold">Welcome Admin!</p>
                     <p className="text-sm md:text-base text-slate-700 font-medium">Welcome Admin</p>
-                    <form>
+                    <form  onSubmit={handleSubmit(adminLogIn)>
                         <div className="my-4">
                             <label className="font-bold" htmlFor="email">Email Address
-                                <input name="email"
+                                <input {...register("email")} name="email"
                                     type="text" id="" className="text-base pl-2 h-10 rounded-sm w-full border-2 border-black bg-inputColor" />
                             </label>
                         </div>
                         <div className="my-4">
                             <label className="font-bold" htmlFor="password">Password
-                                <input type="password" name="password" id="" className="text-base pl-2 h-10 rounded-sm w-full border-2 border-black bg-inputColor" />
+                                <input {...register("password")} type="password" name="password" id="" className="text-base pl-2 h-10 rounded-sm w-full border-2 border-black bg-inputColor" />
                             </label>
                         </div>
                         <p className="text-right my-4 font-bold"><Link href="/forgotPassword">Forgot Password?</Link></p>
@@ -45,4 +63,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
