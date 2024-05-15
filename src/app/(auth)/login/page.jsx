@@ -11,6 +11,7 @@ import * as yup from "yup"
 import { toast } from 'sonner';
 import { AuthContext } from '@/contexts/authContext';
 import { useRouter } from 'next/navigation';
+import LOGO from "../../images/eva.png";
 
 
 const Page = () => {
@@ -31,20 +32,30 @@ const Page = () => {
     })
     const logIn = (data)=> {
         setLoading(true)
-        signInWithEmailAndPassword(auth, data.email, data.password).then((response)=> {
-            localStorage.setItem("token", JSON.stringify(response?.user.accessToken));
-            localStorage.setItem("user", JSON.stringify(response?.user));
-            setUser(user);
-            setUserToken(userToken);
-            toast.success("Welcome to EvaTouch Beauty!")
-            reset();
-            setLoading(false)
-            router.push("/")
-        }).catch((error)=> {
+        try {
+            signInWithEmailAndPassword(auth, data.email, data.password).then((response)=> {
+                setUser(response?.user);
+                setUserToken(response?.user.accessToken);
+                localStorage.setItem("token", JSON.stringify(response?.user.accessToken));
+                localStorage.setItem("user", JSON.stringify(response?.user));
+                toast.success("Welcome to EvaTouch Beauty!")
+                reset();
+                setLoading(false)
+                router.push("/")
+            }).catch((error)=> {
+                console.log(error)
+                if (error === "FirebaseError: Firebase: Error (auth/network-request-failed).") {
+                    toast.error("No Internet Connectivity")
+                    setLoading(false)
+                    return
+                }
+                toast.error("Invalid Credentials")
+                setLoading(false)
+            })   
+        } catch (error) {
             console.log(error)
-            toast.error("Invalid Credentials")
-            setLoading(false)
-        })
+            toast.error("No Internet Connectivity")
+        }
     }
     return (
         <>
@@ -52,7 +63,7 @@ const Page = () => {
                 <div className="w-[90%] md:w-[400px] p-5 bg-white rounded-sm">
                     <div className="flex items-center justify-between">
                         <div>
-                            <Link href="/">LOGO</Link>
+                            <Link href="/"><Image src={LOGO} width={60} height={60} alt="LOGO"/></Link>
                         </div>
                         <Link href="/" className='cursor-pointer'>
                             <FaXmark size={30} />
@@ -64,12 +75,12 @@ const Page = () => {
                         <div className="my-4">
                             <label className="font-bold" htmlFor="email">Email Address
                                 <input {...register("email")} name="email"
-                                    type="text" id="" className="text-base pl-2 h-10 rounded-sm w-full border-2 border-black bg-inputColor" />
+                                    type="text" id="email" className="text-base pl-2 h-10 rounded-sm w-full border-2 border-black bg-inputColor" />
                             </label>
                         </div>
                         <div className="my-4">
                             <label {...register("password")} className="font-bold" htmlFor="password">Password
-                                <input type="password" name="password" id="" className="text-base pl-2 h-10 rounded-sm w-full border-2 border-black bg-inputColor" />
+                                <input type="password" name="password" id="password" className="text-base pl-2 h-10 rounded-sm w-full border-2 border-black bg-inputColor" />
                             </label>
                         </div>
                         <p className="text-right my-4 font-bold"><Link href="/forgotPassword">Forgot Password?</Link></p>

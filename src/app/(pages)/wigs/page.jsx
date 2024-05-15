@@ -171,7 +171,7 @@ const Page = () => {
         {loadingWigs && <div className="lg:col-span-3 md:col-span-2 col-span-1"><Loading /></div>}
         {(!loadingWigs && allWigs) &&
         allWigs?.map((wig, index) => (
-          <div key={index} className="w-full aspect-square lg:p-3">
+          <div key={index} className="w-full aspect-square lg:p-3 lg:hover:bg-white rounded-md duration-200">
             <div className="relative group overflow-hidden rounded-md">
               <LazyLoadImage effect="blur" src={wig.image} alt={wig.name} className="w-screen rounded-md" />
               <div className="rounded-md absolute top-0 bottom-2 left-0 right-0 bg-black bg-opacity-60 invisible opacity-0 group-hover:visible group-hover:opacity-100 duration-300 lg:flex hidden  justify-center items-center">

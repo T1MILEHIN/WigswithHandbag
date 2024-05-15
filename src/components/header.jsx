@@ -12,6 +12,7 @@ import Link from "next/link";
 import Links from "./links";
 import { FaBars } from "react-icons/fa";
 import { FaChevronDown, FaXmark } from "react-icons/fa6";
+import { FaExclamation } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import LOGO from "../app/images/eva.png"
@@ -76,11 +77,11 @@ const liVariant = {
 }
 
 const Header = () => {
+    const {user, userToken, logOut, isAuthenticated} = useContext(AuthContext)
     const [nav, setNav] = useState(false)
     const pathname = usePathname()
     const [subNav, setSubNav] = useState(false)
     const [subNav2, setSubNav2] = useState(false)
-    const {user, logOut} = useContext(AuthContext)
     const { cartItem } = useContext(CartContext)
     const router = useRouter()
     const openSubNav = () => {
@@ -94,13 +95,18 @@ const Header = () => {
     const profile = ()=> {
         if (!user) {
             toast.error(<p className="text-center font-semibold text-sm">You are not logged in Now <br /> But you be redirected to the Login Page</p>, {
+                icon: <FaExclamation color="red" />,
                 position: "top-center",
+                duration: 4000,
             })
             router.push("/login")
         } else {
             toast.success("You are Logged in👍")
         }
     }
+
+    console.log(isAuthenticated)
+
     return (
         <header className={`${vollkorn.className} lg:px-20 px-4 bg-[#E8DFD6] fixed w-full left-0 top-0 flex items-center justify-between z-[9999]`}>
             <div className="xl:block hidden"><Link href="/"><Image src={LOGO} width={60} height={60} style={{width: "auto"}} alt="LOGO" /></Link></div>
@@ -147,7 +153,7 @@ const Header = () => {
                 <div>
                     <FaUser className="cursor-pointer" color="#000" onClick={()=>profile()} size={20} />
                 </div>
-                {user && <button onClick={logOut} className="lg:block hidden w-full rounded-sm border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-black py-2 px-2 font-semibold text-white text-base md:text-base">LOGOUT</button>}
+                {(isAuthenticated) && <button onClick={logOut} className="lg:block hidden w-full rounded-sm border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-black py-2 px-2 font-semibold text-white text-base md:text-base">LOGOUT</button>}
             </div>
             <motion.div className={`${nav ? "static" : "relative"} cursor-pointer bg-black p-2 rounded-md lg:hidden block`}>
                 <AnimatePresence>
@@ -194,7 +200,7 @@ const Header = () => {
                                 <input className="w-full pl-5 md:pl-10 h-10 md:h-14 text-black" type="text" name="" id="" placeholder="Search" />
                                 <IoMdSearch className="absolute left-5 top-1/2 -translate-y-1/2" size={20} />
                             </motion.li>
-                           { user ?
+                           { (isAuthenticated) ?
                            ( <motion.li variants={liVariant} whileTap={{scale: 0.8}}>
                                 <button onClick={logOut} className="w-full rounded-sm border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-red-500 my-3 py-2 px-2 font-semibold text-white text-base md:text-base">LOGOUT</button>
                             </motion.li>):

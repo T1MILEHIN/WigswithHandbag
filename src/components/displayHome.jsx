@@ -55,12 +55,14 @@ const imageVariant3 = {
 
 export default function DisplayHome() {
     return (
-        <Parallax
-            translateY={["0px", "50px"]}
-            speed={15}
-            easing="easeInQuad"
+        <section
+            
             className='overflow-hidden'>
-            <div>
+            <Parallax
+                translateY={["0px", "20px", "40px"]}
+                speed={15}
+                easing="easeInQuad"
+            >
                 <motion.div variants={containerVariant} initial="initial" animate="animate" className="overflow-hidden bg-image py-10">
                     <motion.div variants={imageVariant1} className="lg:block hidden">
                         <Image src={landing1} width={300} height={300} alt="landing-img" className="object-cover" />
@@ -72,8 +74,8 @@ export default function DisplayHome() {
                         <Image src={landing3} width={400} height={400} alt="landing-img" className="object-cover" />
                     </motion.div>
                 </motion.div>
-            </div>
-        </Parallax>
+            </Parallax>
+        </section>
       
     )
   }

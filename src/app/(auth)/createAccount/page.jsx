@@ -2,6 +2,7 @@
 import React, { useState, useContext } from 'react'
 import { FaXmark } from "react-icons/fa6";
 import Link from 'next/link';
+import Image from 'next/image';
 import { toast } from 'sonner';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '@/firebase.config';
@@ -10,6 +11,8 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { AuthContext } from '@/contexts/authContext';
 import { useRouter } from 'next/navigation';
+import LOGO from "../../images/eva.png";
+
 
 
 const Page = () => {
@@ -50,7 +53,7 @@ const Page = () => {
                 <div className="w-[90%] md:w-[400px] p-5 bg-white rounded-sm">
                     <div className="flex items-center justify-between">
                         <div>
-                            Logo
+                            <Image src={LOGO} width={60} height={60} alt="LOGO"/>
                         </div>
                         <Link href="/" className='cursor-pointer'>
                             <FaXmark size={30} />

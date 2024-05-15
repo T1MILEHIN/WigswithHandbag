@@ -25,23 +25,28 @@ const Page = () => {
     const { cartItem, setCartItem } = useContext(CartContext);
     const {user} = useContext(AuthContext)
 
-    useEffect(()=> {
-        const fetchCartWig = async()=> {
-            // const wigsAndBundles = [];
-            // const queryWigSnapshot = await getDocs(collection(db, "wigs"));
-            // const queryBundleSnapshot = await getDocs(collection(db, "bundles"));
-            // queryWigSnapshot.forEach((doc) => {
-            //     // console.log(doc.data());
-            //     wigsAndBundles.push(doc.data())
-            // });
-            // queryBundleSnapshot.forEach((doc) => {
-            //     // console.log(doc.data());
-            //     wigsAndBundles.push(doc.data())
-            // });
-            // console.log(wigsAndBundles.find((item)=> item.id === ));
-        }
-        fetchCartWig();
-    }, [])
+    // useEffect(()=> {
+    //     const fetchCartWig = async()=> {
+    //         const wigsAndBundles = [];
+    //         const queryWigSnapshot = await getDocs(collection(db, "wigs"));
+    //         const queryBundleSnapshot = await getDocs(collection(db, "bundles"));
+    //         queryWigSnapshot.forEach((doc) => {
+    //             // console.log(doc.data());
+    //             wigsAndBundles.push(doc.data())
+    //         });
+    //         queryBundleSnapshot.forEach((doc) => {
+    //             // console.log(doc.data());
+    //             wigsAndBundles.push(doc.data())
+    //         });
+    //         console.log(wigsAndBundles)
+    //         console.log(wigsAndBundles.find((item)=> {
+    //             cartItem.forEach((cartItem=> {
+    //                 cartItem.id === item.id
+    //             }))
+    //         } ));
+    //     }
+    //     fetchCartWig();
+    // }, [])
 
     const checkOut = () => {
         if (!user) {
@@ -78,7 +83,7 @@ const Page = () => {
             });
         }
         if (user) {
-            router.push("/")
+            router.push("/cart")
         }
     }
     const removeItem = (id) => {
@@ -111,7 +116,7 @@ const Page = () => {
                                     <div>
                                         <Image src={item?.image} width={50} height={50} className="aspect-square object-cover rounded-md" alt="" />
                                     </div>
-                                    <div className="md:flex-[4]">
+                                    <div className="md:flex-1">
                                         <p className="text-sm md:text-base font-black">{item?.name}</p>
                                     </div>
                                     <div className={`md:flex-1 flex items-center gap-4 text-sm`}>
@@ -129,15 +134,16 @@ const Page = () => {
                         )) : <h1 className="flex justify-center items-center font-bold text-base md:text-xl">NO ITEM IN YOUR CART</h1>}
                     </AnimatePresence>
                     <Link href="/wigs">
-                        <p className="underline text-[#7F6000]">Continue Shopping</p>
+                        <p className="my-3 underline text-[#7F6000]">Continue Shopping</p>
                     </Link>
                 </div>
-                <div className="mb-3">
-                    <div className="my-8">
+                <hr />
+                <div className="my-3">
+                    <div className="">
                         <h1 className="text-slate-600 text-sm font-bold">TOTAL:</h1>
                         <p className="font-black text-2xl">${cartItem?.map((item) => item.price * item.quantity).reduce((acc, cur) => acc + cur, 0)}</p>
                     </div>
-                    <button onClick={checkOut} className="duration-300 bg-[#7F6000] hover:bg-white border-2 border-[#7F6000] hover:text-[#7F6000] w-full text-white font-bold py-3">CHECKOUT</button>
+                    <button onClick={checkOut} className="duration-300 bg-[#7F6000] hover:bg-white border-2 border-[#7F6000] hover:text-[#7F6000] w-fit text-white font-bold py-3 px-4">CHECKOUT</button>
                 </div>
             </section>
         </div>

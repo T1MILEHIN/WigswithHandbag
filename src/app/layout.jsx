@@ -5,6 +5,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400
 import { Providers } from "./providers";
 import { AuthProvider } from "@/contexts/authContext";
 import { CartProvider } from "@/contexts/cartContext";
+import { DisplayProvider } from "@/contexts/displayContext";
 
 export const metadata = {
   title: "EvaTouch",
@@ -26,7 +27,9 @@ export default function Layout({ children }) {
             <AuthProvider>
               <CartProvider>
                 <Providers>
-                  {children}
+                  <DisplayProvider>
+                    {children}
+                  </DisplayProvider>
                 </Providers>
               </CartProvider>
             </AuthProvider>

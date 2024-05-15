@@ -2,6 +2,8 @@
 import React from 'react'
 import Link from 'next/link'
 import { FaXmark } from "react-icons/fa6";
+import LOGO from "../../images/eva.png";
+import Image from 'next/image';
 
 const page = () => {
     return (
@@ -10,7 +12,7 @@ const page = () => {
                 <div className="md:w-[400px] p-5 bg-white rounded-sm">
                     <div className="flex items-center justify-between">
                         <div>
-                            <Link href="/">LOGO</Link>
+                            <Link href="/"><Image src={LOGO} width={60} height={60} alt="LOGO"/></Link>
                         </div>
                         <Link href="/" className='cursor-pointer'>
                             <FaXmark size={30} />
@@ -37,9 +39,7 @@ const page = () => {
                     <div className='login-options flex flex-col gap-3 font-medium'>
                         <button className='flex items-center justify-center gap-2 border-[1px] border-black rounded-3xl py-2 hover:bg-black hover:text-white duration-300'>Continue with Google</button>
                     </div>
-                    <p className="text-sm md:text-base mt-4 font-semibold ">Don&apos;t have an account? <Link className="underline underline-offset-2 text-BLUE" href="/createAccount">Create Account</Link></p>
                 </div>
-
             </section>
         </>
     )
