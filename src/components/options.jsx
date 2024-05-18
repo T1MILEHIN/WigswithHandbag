@@ -84,7 +84,7 @@ const Options = () => {
                         <motion.section variants={optionContainer} initial="initial" animate={glam ? "animate" : "initial"} exit="exit" className="lg:px-20 px-4">
                             <motion.div className="text-center my-10">
                                 <h1 className={`${poppins.className} font-bold text-xl md:text-3xl my-2 md:my-4`}>Have an event coming up?</h1>
-                                <p className={`${vollkorn.className} md:w-[700px] text-base md:text-lg mx-auto`}>Whether it’s a special occasion or you just want to feel fabulous, we will help you create a flawless look that leaves you feeling glamorous and make you the star of the show. Secure your spot and get ready to slayyy</p>
+                                <p className={`${vollkorn.className} md:w-[700px] text-base md:text-lg mx-auto`}>Whether it’s a special occasion or you just want to feel fabulous, we will help you create a flawless look that leaves you feeling glamorous and make you the star of the show. Secure your spot and get ready to slay</p>
                                 <Link href="/">
                                     <button className="my-3 px-4 md:px-5 py-3 bg-transparent text-black border-2 border-black">Book Apointment</button>
                                 </Link>
