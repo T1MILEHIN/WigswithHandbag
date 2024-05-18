@@ -38,7 +38,7 @@ const Page = () => {
                     </div>
                     <p className="font-bold">Welcome Admin!</p>
                     <p className="text-sm md:text-base text-slate-700 font-medium">Welcome Admin</p>
-                    <form  onSubmit={handleSubmit(adminLogIn)>
+                    <form  onSubmit={handleSubmit(adminLogIn)}>
                         <div className="my-4">
                             <label className="font-bold" htmlFor="email">Email Address
                                 <input {...register("email")} name="email"
@@ -51,7 +51,8 @@ const Page = () => {
                             </label>
                         </div>
                         <p className="text-right my-4 font-bold"><Link href="/forgotPassword">Forgot Password?</Link></p>
-                        <button type="submit" className="w-full rounded-sm hover:text-BLUE border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-black py-2 font-semibold text-white text-base md:text-xl">{false ? "loading" : "Login"}</button>
+                        <button type="submit" 
+                        className="w-full rounded-sm hover:text-BLUE border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-black py-2 font-semibold text-white text-base md:text-xl">{false ? "loading" : "Login"}</button>
                         <p className='text-center font-extralight py-1'>or</p>
                     </form>
                     <div className='login-options flex flex-col gap-3 font-medium'>
