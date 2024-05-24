@@ -171,13 +171,18 @@ const Header = () => {
                 </AnimatePresence>
                 <motion.div variants={divVariant} initial="initial" animate={nav ? "final" : "initial"} className={`min-h-fit fixed ${nav ? "" : ""} inset-0 bg-black text-white origin-top-right duration-300`}>
                         <motion.ul variants={ulVariant} className="font-bold md:font-semibold p-4 md:text-xl min-h-screen flex flex-col justify-between">
-                            <motion.li>
+                            <motion.li className="flex gap-4 items-center">
                                 <Link href="/cart">
                                     <div className="relative">
                                         <MdOutlineShoppingBag size={30} color="white" />
                                         <span className="w-6 aspect-square flex justify-center items-center bg-white text-black absolute left-0 top-0 rounded-full">{cartItem.length}</span>
                                     </div>
                                 </Link>
+                                <li>
+                                <div>
+                                    <FaUser className="cursor-pointer" color="#fff" onClick={()=>profile()} size={20} />
+                                </div>
+                                </li>
                             </motion.li>
                             <motion.li onClick={() => openSubNav()} variants={liVariant}><span className="relative px-3 flex items-center gap-1">Shop<FaChevronDown /></span>
                                    { subNav &&
