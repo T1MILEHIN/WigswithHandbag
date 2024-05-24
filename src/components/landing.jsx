@@ -46,13 +46,12 @@ const Landing = () => {
       </div>
       <Options />
 
-      <section className="md:my-32 my-10 md:px-20 px-4 ">
+      <section className="md:my-16 my-10 md:px-20 px-4 ">
         <div className="relative flex justify-between my-4">
           <div>
             <h1 className={`${poppins.className} font-bold text-2xl md:text-4xl`}>Best Sellers</h1>
             <p className={`${vollkorn.className} text-base md:text-lg`}>Shop our range of products and embrace your unique radiance</p>
           </div>
-          {/* <SlideController /> */}
         </div>
 
         <Slider 
@@ -60,7 +59,7 @@ const Landing = () => {
           best2 ={best_two}
           best3 ={best_three}
           best4={best_four}
-          rtl={true}
+          rtl={false}
          />
       </section>
 

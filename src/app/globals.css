@@ -177,7 +177,7 @@ div.landing-bg::before {
   .bg-image>div {
     width: 100%;
     aspect-ratio: 1/1;
-    border: 2px solid red;
+    /* border: 2px solid red; */
   }
   .bg-image div img {
     width: 100%;

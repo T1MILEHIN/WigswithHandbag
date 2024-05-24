@@ -8,10 +8,11 @@ import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import { toast } from 'sonner';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const Page = () => {
-    
+    const router = useRouter()
     const schema = yup.object().shape({
         email: yup.string().email("Invalid email address").required("Email is required"),
         password: yup.string().required("Password is required"),
@@ -21,7 +22,13 @@ const Page = () => {
         resolver: yupResolver(schema),
     });
     const adminLogIn = (data)=> {
-
+        console.log(data);
+        if (data.email === "tunmisebabade@gmail.com") {
+            toast.success("Welcome Admin!!")
+            router.push("/dashboard")
+        }else {
+            toast.error('Invalid Admin details')
+        }
     }
 
     return (
@@ -36,27 +43,23 @@ const Page = () => {
                             <FaXmark size={30} />
                         </Link>
                     </div>
-                    <p className="font-bold">Welcome Admin!</p>
                     <p className="text-sm md:text-base text-slate-700 font-medium">Welcome Admin</p>
-                    <form  onSubmit={handleSubmit(adminLogIn)>
+                    <form  onSubmit={handleSubmit(adminLogIn)}>
                         <div className="my-4">
                             <label className="font-bold" htmlFor="email">Email Address
                                 <input {...register("email")} name="email"
-                                    type="text" id="" className="text-base pl-2 h-10 rounded-sm w-full border-2 border-black bg-inputColor" />
+                                    type="text" id="email" className="text-base pl-2 h-10 rounded-sm w-full border-2 border-black bg-inputColor" />
                             </label>
                         </div>
                         <div className="my-4">
                             <label className="font-bold" htmlFor="password">Password
-                                <input {...register("password")} type="password" name="password" id="" className="text-base pl-2 h-10 rounded-sm w-full border-2 border-black bg-inputColor" />
+                                <input {...register("password")} type="password" name="password" id="password" className="text-base pl-2 h-10 rounded-sm w-full border-2 border-black bg-inputColor" />
                             </label>
                         </div>
                         <p className="text-right my-4 font-bold"><Link href="/forgotPassword">Forgot Password?</Link></p>
                         <button type="submit" className="w-full rounded-sm hover:text-BLUE border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-black py-2 font-semibold text-white text-base md:text-xl">{false ? "loading" : "Login"}</button>
-                        <p className='text-center font-extralight py-1'>or</p>
                     </form>
-                    <div className='login-options flex flex-col gap-3 font-medium'>
-                        <button className='flex items-center justify-center gap-2 border-[1px] border-black rounded-3xl py-2 hover:bg-black hover:text-white duration-300'>Continue with Google</button>
-                    </div>
+                    
                 </div>
             </section>
         </>

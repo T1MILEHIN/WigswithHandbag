@@ -101,14 +101,14 @@ const Header = () => {
             })
             router.push("/login")
         } else {
-            toast.success("You are Logged in👍")
+            router.push("/profile");
         }
     }
 
     console.log(isAuthenticated)
 
     return (
-        <header className={`${vollkorn.className} lg:px-20 px-4 bg-[#E8DFD6] fixed w-full left-0 top-0 flex items-center justify-between z-[9999]`}>
+        <header className={`${vollkorn.className} lg:px-20 px-6 bg-[#E8DFD6] fixed w-full left-0 top-0 right-0 flex items-center justify-between z-[9999]`}>
             <div className="xl:block hidden"><Link href="/"><Image src={LOGO} width={60} height={60} style={{width: "auto"}} alt="LOGO" /></Link></div>
             <div className="xl:hidden block"><Link href="/"><Image src={LOGO} width={40} height={40} style={{width: "auto"}} alt="LOGO" /></Link></div>
             <nav className="xl:block hidden">
@@ -153,7 +153,7 @@ const Header = () => {
                 <div>
                     <FaUser className="cursor-pointer" color="#000" onClick={()=>profile()} size={20} />
                 </div>
-                {(isAuthenticated) && <button onClick={logOut} className="lg:block hidden w-full rounded-sm border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-black py-2 px-2 font-semibold text-white text-base md:text-base">LOGOUT</button>}
+                {(isAuthenticated) && <button onClick={logOut} className={`${poppins.className} lg:block hidden w-full rounded-sm hover:bg-red-500 duration-300 bg-red-600 py-2 px-3 font-medium text-white text-base`}>LOGOUT</button>}
             </div>
             <motion.div className={`${nav ? "static" : "relative"} cursor-pointer bg-black p-2 rounded-md lg:hidden block`}>
                 <AnimatePresence>

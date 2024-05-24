@@ -1,65 +1,53 @@
-"use client"
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
-import { Parallax } from 'react-scroll-parallax';
+"use client";
 import Image from 'next/image';
+// import { LazyLoadImage } from 'react-lazy-load-image-component';
+// import 'react-lazy-load-image-component/src/effects/blur.css';
 import arrival_one from "../app/images/arr1.png"
-import arrival_two from "../app/images/arr2.png"
-import arrival_three from "../app/images/arr3.png"
-import arrival_four from "../app/images/arr4.png"
-import SlideController from './slideController';
+// import arrival_two from "../app/images/arr2.png"
+// import arrival_three from "../app/images/arr3.png"
+// import arrival_four from "../app/images/arr4.png"
+// import SlideController from './slideController';
+import { Card, CardContent } from "@/components/ui/card";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel"
 
-const Slider = ({best1, best2, best3, best4, rtl}) => {
+
+const Slider = ({ best1, best2, best3, best4, rtl }) => {
+    const images = [
+        best1,
+        best2,
+        best3,
+        best4
+    ]
     return (
-            <section className="slider">
-                <Splide aria-label="My Favorite Images" options={{
-                    type : 'loop',
-                    perPage: 3,
-                    perMove: 1,
-                    autoplay: true,
-                    interval: 3000,
-                    speed: 3000,
-                    pauseOnHover: true,
-                    arrows: true,
-                    pagination: false,
-                    gap: "40px",
-                    drag : 'free',
-                    snap : true,
-                    width: "100%",
-                    height:"100%",
-                    direction: rtl ? "rtl" : "ltr",
-                     breakpoints: {
-                        640: {
-                            type : 'loop',
-                            perPage: 1,
-                            perMove: 1,
-                        }
-                    }
+        <section className="slider">
+            <Carousel
+                opts={{
+                    align: "start",
+                    loop: true,
                 }}
-                 className="overflow-hidden relative">
-                    <SlideController />
-                    <SplideSlide>
-                    <div className="">
-                        <Image placeholder='blur' src={best1 || arrival_one} width={1000} height={1000} alt="arrival-one-img" className="w-full aspect-square object-cover" />
-                    </div>
-                    </SplideSlide>
-                    <SplideSlide>
-                        <div className="">
-                        <Image placeholder='blur' src={best2 || arrival_two} width={1000} height={1000} alt="arrival-two-img" className="w-full aspect-square object-cover" />
-                        </div>
-                    </SplideSlide>
-                    <SplideSlide>
-                    <div className="">
-                        <Image placeholder='blur' src={best3 || arrival_three} width={1000} height={1000} alt="arrival-three-img" className="w-full aspect-square object-cover" />
-                    </div>
-                    </SplideSlide>
-                    <SplideSlide>
-                    <div className="">
-                        <Image placeholder='blur' src={best4 || arrival_four} width={1000} height={1000} alt="arrival-four-img" className="w-full aspect-square object-cover" />
-                    </div>
-                    </SplideSlide>
-                </Splide>
-            </section>
+                className="w-full max-w-full"
+            >
+                <CarouselContent>
+                    {images.map((img, index) => (
+                        <CarouselItem key={index} className="basis-full md:basis-1/2 lg:basis-1/3">
+                            <div className="p-1">
+                                <Card style={{background: 'transparent', border: 'none', boxShadow: 'none'}}>
+                                    <CardContent className="flex aspect-square items-center justify-center">
+                                        <Image src={img || arrival_one} alt="arrival-one-img" width={260} height={350} className="rounded-md w-full aspect-square object-cover" />
+                                    </CardContent>
+                                </Card>
+                            </div>
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+            </Carousel>
+        </section>
     )
 }
 

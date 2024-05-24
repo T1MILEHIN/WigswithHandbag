@@ -15,10 +15,10 @@ const nextConfig = {
         hostname: 'firebasestorage.googleapis.com',
       },
     ],
-    domains: [
-      'firebasestorage.googleapis.com',
-      'wigandhandbag-1b82e.appspot.com'
-    ],
+    // domains: [
+    //   'firebasestorage.googleapis.com',
+    //   'wigandhandbag-1b82e.appspot.com'
+    // ],
     formats: [
       'image/avif',
       'image/webp',
