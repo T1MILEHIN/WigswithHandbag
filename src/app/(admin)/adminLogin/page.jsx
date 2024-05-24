@@ -57,7 +57,13 @@ const Page = () => {
                             </label>
                         </div>
                         <p className="text-right my-4 font-bold"><Link href="/forgotPassword">Forgot Password?</Link></p>
+<<<<<<< HEAD:src/app/(admin)/adminLogin/page.jsx
                         <button type="submit" className="w-full rounded-sm hover:text-BLUE border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-black py-2 font-semibold text-white text-base md:text-xl">{false ? "loading" : "Login"}</button>
+=======
+                        <button type="submit" 
+                        className="w-full rounded-sm hover:text-BLUE border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-black py-2 font-semibold text-white text-base md:text-xl">{false ? "loading" : "Login"}</button>
+                        <p className='text-center font-extralight py-1'>or</p>
+>>>>>>> 9161a4910ece61bad453e98361b1364235fb4e01:src/app/(admin)/admin/page.jsx
                     </form>
                     
                 </div>

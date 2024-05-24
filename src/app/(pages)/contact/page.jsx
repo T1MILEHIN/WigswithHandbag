@@ -13,7 +13,7 @@ const ContactPage = () => {
     <section className="">
         <div className="text-center py-10 md:py-14 px-5 shadow-md md:leading-10 bg-white">
             <h1 className="font-bold text-lg md:text-4xl"><span className={poppins.className}>We are always available for you!</span></h1>
-            <p className="md:text-base text-sm"><span className={vollkorn.className}>Need to make an enquiry or get in touch with us? Send us a mail at evatouchbeauty@gmail.com</span></p>
+            <p className="md:text-base text-sm"><span className={vollkorn.className}>Need to make an inquiry or get in touch with us? Send us a mail at evatouchbeauty@gmail.com</span></p>
         </div>
 
         <p className="my-4 md:my-10 font-light"><span className={vollkorn.className}>Alternatively, you can fill our contact form. We make sure that you get a response as soon as possible</span></p>
