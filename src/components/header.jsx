@@ -105,7 +105,6 @@ const Header = () => {
         }
     }
 
-    console.log(userToken)
 
     return (
         <header className={`${vollkorn.className} lg:px-20 px-6 bg-[#E8DFD6] fixed w-full left-0 top-0 right-0 flex items-center justify-between z-[9999]`}>

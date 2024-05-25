@@ -70,7 +70,6 @@ const Options = () => {
         <>
             <Parallax
                 speed={10}
-                translateY={['0px', '-80px']}
                 className='overflow-hidden'
             >
                 <div className="py-10 shadow-md p-3 md:p-6 w-fit mx-auto overflow-hidden bg-white">
