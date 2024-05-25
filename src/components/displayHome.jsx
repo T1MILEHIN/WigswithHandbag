@@ -63,15 +63,15 @@ export default function DisplayHome() {
                 speed={15}
                 easing="easeInQuad"
             >
-                <motion.div variants={containerVariant} initial="initial" animate="animate" className="overflow-hidden bg-image py-20 md:py-10">
-                    <motion.div variants={imageVariant1} className="lg:block hidden">
-                        <Image src={landing1} width={300} height={300} alt="landing-img" className="object-cover" />
+                <motion.div variants={containerVariant} initial="initial" animate="animate" className="bg-image py-20 md:py-10">
+                    <motion.div variants={imageVariant1} className="lg:block hidden relative">
+                        <Image src={landing1} sizes="100vw" alt="landing-img" className="object-cover" />
                     </motion.div>
-                    <motion.div variants={imageVariant2} className="">
-                        <Image priority="true" src={landing2} width={300} height={300} alt="landing-img" className="object-cover" />
+                    <motion.div variants={imageVariant2} className="relative">
+                        <Image priority="true" src={landing2} sizes="100vw" objectFit="cover" alt="landing-img" className="object-cover" />
                     </motion.div>
-                    <motion.div variants={imageVariant3} className="lg:block hidden">
-                        <Image src={landing3} width={400} height={400} alt="landing-img" className="object-cover" />
+                    <motion.div variants={imageVariant3} className="lg:block hidden relative">
+                        <Image src={landing3} sizes="100vw" alt="landing-img" className="object-cover" />
                     </motion.div>
                 </motion.div>
             </Parallax>
