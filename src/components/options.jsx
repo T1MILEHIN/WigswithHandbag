@@ -84,7 +84,7 @@ const Options = () => {
                             <motion.div className="text-center my-10">
                                 <h1 className={`${poppins.className} font-bold text-xl md:text-3xl my-2 md:my-4`}>Have an event coming up?</h1>
                                 <p className={`${vollkorn.className} md:w-[700px] text-base md:text-lg mx-auto`}>Whether it’s a special occasion or you just want to feel fabulous, we will help you create a flawless look that leaves you feeling glamorous and make you the star of the show. Secure your spot and get ready to slay</p>
-                                <Link href="/">
+                                <Link href="/book_appointment">
                                     <button className="my-3 px-4 md:px-5 py-3 bg-transparent text-black border-2 border-black">Book Apointment</button>
                                 </Link>
                             </motion.div>
@@ -108,7 +108,7 @@ const Options = () => {
                             <motion.div className="text-center my-10">
                                 <h1 className={`${poppins.className} font-bold text-xl md:text-3xl my-2 md:my-4`}>Is your big day on the way?</h1>
                                 <p className={`${vollkorn.className} md:w-[700px] text-base md:text-lg mx-auto`}>Get ready to say ‘<span className="font-black">I DO</span>’ in style with our exceptional bridal makeup services. At Evatouch beauty, we are equipped with all that it takes to make you look absolutely stunning and make you the most beautiful bride ever.</p>
-                                <Link href="/softglam">
+                                <Link href="/book_appointment">
                                     <button className="my-3 px-4 md:px-5 py-3 bg-transparent text-black border-2 border-black">Book Apointment</button>
                                 </Link>
                             </motion.div>

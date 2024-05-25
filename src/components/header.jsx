@@ -180,11 +180,9 @@ const Header = () => {
                                     <span className="w-6 aspect-square flex justify-center items-center bg-white text-black absolute left-0 top-0 rounded-full">{cartItem.length}</span>
                                 </div>
                             </Link>
-                            <li>
-                                <div>
-                                    <FaUser className="cursor-pointer" color="#fff" onClick={() => profile()} size={20} />
-                                </div>
-                            </li>
+                            <div>
+                                <FaUser className="cursor-pointer" color="#fff" onClick={() => profile()} size={20} />
+                            </div>
                         </motion.li>
                         <motion.li onClick={() => openSubNav()} variants={liVariant}><span className="relative px-3 flex items-center gap-1">Shop<FaChevronDown /></span>
                             <AnimatePresence>

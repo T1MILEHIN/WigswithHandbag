@@ -3,7 +3,6 @@ import { Vollkorn, Poppins } from "next/font/google";
 const vollkorn = Vollkorn({ subsets: ["latin"] })
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"] },)
 import React from 'react';
-import Image from 'next/image';
 import { useContext } from 'react';
 import { AuthContext } from "@/contexts/authContext";
 import { CartContext } from '@/contexts/cartContext';
@@ -14,12 +13,10 @@ import { PiSealFill } from 'react-icons/pi'
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import Link from "next/link";
-import { db } from "@/firebase.config"
-import { storage } from '@/firebase.config';
-import { ref } from "firebase/storage";
-import { collection, getDocs } from "firebase/firestore";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { DisplayContext } from "@/contexts/displayContext";
 
@@ -28,28 +25,6 @@ const Page = () => {
     const { cartItem, setCartItem } = useContext(CartContext);
     const {user} = useContext(AuthContext)
     const { FullScreen } = useContext(DisplayContext)
-    // useEffect(()=> {
-    //     const fetchCartWig = async()=> {
-    //         const wigsAndBundles = [];
-    //         const queryWigSnapshot = await getDocs(collection(db, "wigs"));
-    //         const queryBundleSnapshot = await getDocs(collection(db, "bundles"));
-    //         queryWigSnapshot.forEach((doc) => {
-    //             // console.log(doc.data());
-    //             wigsAndBundles.push(doc.data())
-    //         });
-    //         queryBundleSnapshot.forEach((doc) => {
-    //             // console.log(doc.data());
-    //             wigsAndBundles.push(doc.data())
-    //         });
-    //         console.log(wigsAndBundles)
-    //         console.log(wigsAndBundles.find((item)=> {
-    //             cartItem.forEach((cartItem=> {
-    //                 cartItem.id === item.id
-    //             }))
-    //         } ));
-    //     }
-    //     fetchCartWig();
-    // }, [])
 
     const checkOut = () => {
         if (!user) {
@@ -115,7 +90,7 @@ const Page = () => {
                             <motion.div exit={{ y: -20, opacity: 0 }} transition={{ type: "spring", duration: 0.3 }} key={item?.id} className="py-4 px-2">
                                 <div className="flex items-center gap-2 md:gap-4">
                                     <div>
-                                        <Image src={item?.image} width={50} height={50} className="aspect-square object-cover rounded-md" alt="" />
+                                        <LazyLoadImage effect="blur" src={item?.image} className="w-20 aspect-square object-cover rounded-md" alt="" />
                                     </div>
                                     <div className="md:flex-1">
                                         <p className="text-sm md:text-base font-black">{item?.name}</p>
