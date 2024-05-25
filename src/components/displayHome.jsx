@@ -63,7 +63,7 @@ export default function DisplayHome() {
                 speed={15}
                 easing="easeInQuad"
             >
-                <motion.div variants={containerVariant} initial="initial" animate="animate" className="overflow-hidden bg-image py-10">
+                <motion.div variants={containerVariant} initial="initial" animate="animate" className="overflow-hidden bg-image py-20 md:py-10">
                     <motion.div variants={imageVariant1} className="lg:block hidden">
                         <Image src={landing1} width={300} height={300} alt="landing-img" className="object-cover" />
                     </motion.div>

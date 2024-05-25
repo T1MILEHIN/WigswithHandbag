@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(); // Initial empty state
   const [userToken, setUserToken] = useState(); // Initial empty state
   const [loading, setLoading] = useState(false); // Optional for SSR
-  const [isAuthenticated, setIsAuthenticated] = useState(()=> localStorage.getItem("isAuthenticated") ? localStorage.getItem("isAuthenticated") : false)
+  const [isAuthenticated, setIsAuthenticated] = useState()
 
   // Fetch data from localStorage on component mount (optional for SSR)
   useEffect(() => {

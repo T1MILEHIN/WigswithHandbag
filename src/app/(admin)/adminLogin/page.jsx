@@ -34,7 +34,7 @@ const Page = () => {
     return (
         <>
             <section className="bg-black min-h-screen flex justify-center items-center">
-                <div className="md:w-[400px] p-5 bg-white rounded-sm">
+                <div className="w-[90%] sm:w-[400px] p-5 bg-white rounded-sm">
                     <div className="flex items-center justify-between">
                         <div>
                             <Link href="/"><Image src={LOGO} width={60} height={60} alt="LOGO"/></Link>

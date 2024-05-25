@@ -7,7 +7,7 @@ const page = () => {
 
     return (
         <section className="min-h-screen flex justify-center items-center bg-black">
-            <div className="border-2 border-black md:w-[400px] p-5 bg-white rounded-sm">
+            <div className="border-2 border-black sm:w-[400px] p-5 bg-white rounded-sm">
                 <div>
                     <Link href="/">LOGO</Link>
                 </div>

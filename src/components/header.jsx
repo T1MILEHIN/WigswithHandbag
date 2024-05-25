@@ -1,8 +1,8 @@
 "use client"
 import { Vollkorn, Poppins } from "next/font/google";
 
-const vollkorn = Vollkorn({ subsets: ["latin"]})
-const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"]}, )
+const vollkorn = Vollkorn({ subsets: ["latin"] })
+const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"] },)
 
 import React, { useState, useContext } from "react";
 import { MdOutlineShoppingBag } from "react-icons/md";
@@ -77,7 +77,7 @@ const liVariant = {
 }
 
 const Header = () => {
-    const {user, userToken, logOut, isAuthenticated} = useContext(AuthContext)
+    const { user, logOut, userToken } = useContext(AuthContext)
     const [nav, setNav] = useState(false)
     const pathname = usePathname()
     const [subNav, setSubNav] = useState(false)
@@ -92,7 +92,7 @@ const Header = () => {
         setSubNav2(prev => !prev)
         setSubNav(false)
     }
-    const profile = ()=> {
+    const profile = () => {
         if (!user) {
             toast.error(<p className="text-center font-semibold text-sm">You are not logged in Now <br /> But you be redirected to the Login Page</p>, {
                 icon: <FaExclamation color="red" />,
@@ -105,12 +105,12 @@ const Header = () => {
         }
     }
 
-    console.log(isAuthenticated)
+    console.log(userToken)
 
     return (
         <header className={`${vollkorn.className} lg:px-20 px-6 bg-[#E8DFD6] fixed w-full left-0 top-0 right-0 flex items-center justify-between z-[9999]`}>
-            <div className="xl:block hidden"><Link href="/"><Image src={LOGO} width={60} height={60} style={{width: "auto"}} alt="LOGO" /></Link></div>
-            <div className="xl:hidden block"><Link href="/"><Image src={LOGO} width={40} height={40} style={{width: "auto"}} alt="LOGO" /></Link></div>
+            <div className="xl:block hidden"><Link href="/"><Image src={LOGO} width={60} height={60} style={{ width: "auto" }} alt="LOGO" /></Link></div>
+            <div className="xl:hidden block"><Link href="/"><Image src={LOGO} width={40} height={40} style={{ width: "auto" }} alt="LOGO" /></Link></div>
             <nav className="xl:block hidden">
                 <Links />
             </nav>
@@ -120,40 +120,43 @@ const Header = () => {
                     <IoMdSearch className="absolute left-5 top-1/2 -translate-y-1/2" size={20} />
                 </div>
                 {!cartItem.length ?
-                <Drawer>
-                    <DrawerTrigger>
+                    <Drawer>
+                        <DrawerTrigger>
+                            <div className="relative">
+                                <MdOutlineShoppingBag size={30} />
+                                <span className="w-6 aspect-square flex justify-center items-center bg-black text-white absolute -top-1 -right-1 rounded-full">{cartItem.length}</span>
+                            </div>
+                        </DrawerTrigger>
+                        <DrawerContent>
+                            <DrawerHeader>
+                                <div className="mx-auto text-center font-semibold leading-5">
+                                    <DrawerTitle>No Item in Your Cart Now!!</DrawerTitle>
+                                    <DrawerDescription>Would you like to go through our products?.</DrawerDescription>
+                                </div>
+                            </DrawerHeader>
+                            <DrawerFooter className="mx-auto">
+                                <Button className=""><Link href="/wigs">Yes</Link></Button>
+                                <DrawerClose>
+                                    <Button variant="outline" className="" >Cancel</Button>
+                                </DrawerClose>
+                            </DrawerFooter>
+                        </DrawerContent>
+                    </Drawer>
+                    :
+                    <Link href="/cart">
                         <div className="relative">
                             <MdOutlineShoppingBag size={30} />
                             <span className="w-6 aspect-square flex justify-center items-center bg-black text-white absolute -top-1 -right-1 rounded-full">{cartItem.length}</span>
                         </div>
-                    </DrawerTrigger>
-                    <DrawerContent>
-                        <DrawerHeader>
-                            <div className="mx-auto text-center font-semibold leading-5">
-                                <DrawerTitle>No Item in Your Cart Now!!</DrawerTitle>
-                                <DrawerDescription>Would you like to go through our products?.</DrawerDescription>
-                            </div>
-                        </DrawerHeader>
-                        <DrawerFooter className="mx-auto">
-                            <Button className=""><Link href="/wigs">Yes</Link></Button>
-                            <DrawerClose>
-                                <Button variant="outline" className="" >Cancel</Button>
-                            </DrawerClose>
-                        </DrawerFooter>
-                    </DrawerContent>
-                </Drawer>
-                :
-                <Link href="/cart">
-                    <div className="relative">
-                        <MdOutlineShoppingBag size={30} />
-                        <span className="w-6 aspect-square flex justify-center items-center bg-black text-white absolute -top-1 -right-1 rounded-full">{cartItem.length}</span>
-                    </div>
-                </Link>
+                    </Link>
                 }
                 <div>
-                    <FaUser className="cursor-pointer" color="#000" onClick={()=>profile()} size={20} />
+                    <FaUser className="cursor-pointer" color="#000" onClick={() => profile()} size={20} />
                 </div>
-                {(isAuthenticated) && <button onClick={logOut} className={`${poppins.className} lg:block hidden w-full rounded-sm hover:bg-red-500 duration-300 bg-red-600 py-2 px-3 font-medium text-white text-base`}>LOGOUT</button>}
+                {(userToken) &&
+                <div> 
+                    <button onClick={logOut} className={`${poppins.className} lg:block hidden w-full rounded-sm hover:bg-red-600 duration-300 bg-red-500 py-2 px-3 font-medium text-white text-base`}>LOGOUT</button>
+                </div>}
             </div>
             <motion.div className={`${nav ? "static" : "relative"} cursor-pointer bg-black p-2 rounded-md lg:hidden block`}>
                 <AnimatePresence>
@@ -170,60 +173,63 @@ const Header = () => {
                     }
                 </AnimatePresence>
                 <motion.div variants={divVariant} initial="initial" animate={nav ? "final" : "initial"} className={`min-h-fit fixed ${nav ? "" : ""} inset-0 bg-black text-white origin-top-right duration-300`}>
-                        <motion.ul variants={ulVariant} className="font-bold md:font-semibold p-4 md:text-xl min-h-screen flex flex-col justify-between">
-                            <motion.li className="flex gap-4 items-center">
-                                <Link href="/cart">
-                                    <div className="relative">
-                                        <MdOutlineShoppingBag size={30} color="white" />
-                                        <span className="w-6 aspect-square flex justify-center items-center bg-white text-black absolute left-0 top-0 rounded-full">{cartItem.length}</span>
-                                    </div>
-                                </Link>
-                                <li>
-                                <div>
-                                    <FaUser className="cursor-pointer" color="#fff" onClick={()=>profile()} size={20} />
+                    <motion.ul variants={ulVariant} className="font-bold md:font-semibold p-4 md:text-xl min-h-screen flex flex-col justify-between">
+                        <motion.li className="flex gap-4 items-center">
+                            <Link href="/cart">
+                                <div className="relative">
+                                    <MdOutlineShoppingBag size={30} color="white" />
+                                    <span className="w-6 aspect-square flex justify-center items-center bg-white text-black absolute left-0 top-0 rounded-full">{cartItem.length}</span>
                                 </div>
-                                </li>
-                            </motion.li>
-                            <motion.li onClick={() => openSubNav()} variants={liVariant}><span className="relative px-3 flex items-center gap-1">Shop<FaChevronDown /></span>
-                                   { subNav &&
-                                    <motion.ul initial={{height: 0, opacity: 0}} animate={{height: "100%", opacity: 1}} exit={{x: "100px", opacity: 0}} className={`z-10 absolute top-10 right-20 flex flex-col gap-5 py-2 px-4 transition-all duration-300 overflow-hidden`}>
+                            </Link>
+                            <li>
+                                <div>
+                                    <FaUser className="cursor-pointer" color="#fff" onClick={() => profile()} size={20} />
+                                </div>
+                            </li>
+                        </motion.li>
+                        <motion.li onClick={() => openSubNav()} variants={liVariant}><span className="relative px-3 flex items-center gap-1">Shop<FaChevronDown /></span>
+                            <AnimatePresence>
+                                {subNav &&
+                                    <motion.ul initial={{ height: 0, opacity: 0 }} animate={{ height: "100%", opacity: 1 }} exit={{ x: "-100px", opacity: 0 }} className={`z-10 flex flex-col justify-between gap-5 py-3 px-4 transition-all duration-300 overflow-hidden`}>
                                         <Link href="/wigs">Wig</Link>
                                         <Link href="/bundles">Bundle</Link>
                                     </motion.ul>}
-                            </motion.li>
-                            <motion.li onClick={() => openSubNav2()} variants={liVariant}><span className="relative px-3 flex items-center gap-1">Our Services<FaChevronDown /></span>
-                                <AnimatePresence>
-                                   { subNav2 && <motion.ul initial={{height: 0, opacity: 0}} animate={{height: "100%", opacity: 1}} exit={{x: "100px", opacity: 0}} className={`z-10 absolute top-20 right-20 transition-all duration-300 px-4 overflow-hidden`}>
-                                        <Link href="/makeup">MakeUp</Link>
-                                    </motion.ul>}
-                                </AnimatePresence>
-                            </motion.li>
-                            <motion.li variants={liVariant}><Link className={`${pathname === "/gallery" && "nav-others"} nav-active px-3 py-3`} href="/gallery">Gallery</Link></motion.li>
-                            <motion.li variants={liVariant}><Link className={`${pathname === "/about" && "nav-others"} nav-active px-3 py-3`} href="/about">About Us</Link></motion.li>
-                            <motion.li variants={liVariant}><Link className={`${pathname === "/contact" && "nav-others"} nav-active px-3 py-3`} href="/contact">Contact Us</Link></motion.li>
-                            <motion.li variants={liVariant} className="relative">
-                                <input className="w-full pl-5 md:pl-10 h-10 md:h-14 text-black" type="text" name="" id="" placeholder="Search" />
-                                <IoMdSearch className="absolute left-5 top-1/2 -translate-y-1/2" size={20} />
-                            </motion.li>
-                           { (isAuthenticated) ?
-                           ( <motion.li variants={liVariant} whileTap={{scale: 0.8}}>
-                                <button onClick={logOut} className="w-full rounded-sm border-2 border-black hover:bg-transparent hover:text-black duration-300 bg-red-500 my-3 py-2 px-2 font-semibold text-white text-base md:text-base">LOGOUT</button>
-                            </motion.li>):
+                            </AnimatePresence>
+                        </motion.li>
+                        <motion.li onClick={() => openSubNav2()} variants={liVariant}><span className="relative px-3 flex items-center gap-1">Our Services<FaChevronDown /></span>
+                            <AnimatePresence>
+                                {subNav2 && 
+                                <motion.ul initial={{ height: 0, opacity: 0 }} animate={{ height: "100%", opacity: 1 }} exit={{ x: "-100px", opacity: 0 }} className={`py-3 z-10 transition-all duration-300 px-4 overflow-hidden`}>
+                                    <Link href="/makeup">MakeUp</Link>
+                                </motion.ul>}
+                            </AnimatePresence>
+                        </motion.li>
+                        <motion.li variants={liVariant}><Link className={`${pathname === "/gallery" && "nav-others"} nav-active px-3 py-3`} href="/gallery">Gallery</Link></motion.li>
+                        <motion.li variants={liVariant}><Link className={`${pathname === "/about" && "nav-others"} nav-active px-3 py-3`} href="/about">About Us</Link></motion.li>
+                        <motion.li variants={liVariant}><Link className={`${pathname === "/contact" && "nav-others"} nav-active px-3 py-3`} href="/contact">Contact Us</Link></motion.li>
+                        <motion.li variants={liVariant} className="relative">
+                            <input className="w-full pl-5 md:pl-10 h-10 md:h-14 text-black" type="text" name="" id="" placeholder="Search" />
+                            <IoMdSearch className="absolute left-5 top-1/2 -translate-y-1/2" size={20} />
+                        </motion.li>
+                        {(userToken) ?
+                            (<motion.li variants={liVariant} whileTap={{ scale: 0.8 }}>
+                                <button onClick={logOut} className="w-full rounded-sm hover:bg-red-600 hover:text-white duration-300 bg-red-500 my-3 py-2 px-2 font-semibold text-white text-base md:text-base">LOGOUT</button>
+                            </motion.li>) :
                             (
                                 <>
-                                    <motion.li variants={liVariant} whileTap={{scale: 0.8}}>
+                                    <motion.li variants={liVariant} whileTap={{ scale: 0.95 }}>
                                         <Link href="/login">
                                             <button className="w-full rounded-sm border-2 hover:bg-[#7F6000] hover:text-white duration-300 py-2 px-2 font-semibold text-white text-base md:text-base border-[#7F6000]">LOGIN</button>
                                         </Link>
                                     </motion.li>
-                                    <motion.li variants={liVariant} whileTap={{scale: 0.8}}>
+                                    <motion.li variants={liVariant} whileTap={{ scale: 0.95 }}>
                                         <Link href="/createAccount">
                                             <button className="w-full rounded-sm border-2 border-[#7F6000] hover:bg-transparent hover:text-white duration-300 py-2 px-2 font-semibold text-white text-base md:text-base bg-[#7F6000]">SIGNUP</button>
                                         </Link>
                                     </motion.li>
                                 </>
                             )}
-                        </motion.ul>
+                    </motion.ul>
                 </motion.div>
             </motion.div>
         </header>

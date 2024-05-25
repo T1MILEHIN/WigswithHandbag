@@ -35,17 +35,16 @@ const Landing = () => {
             <p className="text-lg md:text-2xl my-1 lg:my-4">The ultimate feel and look Good store</p>
             <div className="text-base md:text-xl flex items-center gap-3 md:gap-4 font-bold w-fit md:mx-auto">
               <Link href="/wigs">
-                <motion.button whileTap={{scale: 0.8}} whileHover={{scale:1.1}} className="md:px-5 px-2 py-3 md:py-4 text-black bg-white lg:text-base text-sm ">SHOP NOW</motion.button>
+                <motion.button whileTap={{scale: 0.95}} whileHover={{scale:1.05}} className="md:px-5 px-2 py-3 md:py-4 text-black bg-white lg:text-base text-sm ">SHOP NOW</motion.button>
               </Link>
               <Link href="/book_appointment">
-                <motion.button whileTap={{scale: 0.8}} whileHover={{scale:1.1}} className="md:px-5 px-2 py-3 md:py-4 bg-transparent text-white border-2 border-white lg:text-base text-sm ">BOOK APPOINTMENT</motion.button>
+                <motion.button whileTap={{scale: 0.95}} whileHover={{scale:1.05}} className="md:px-5 px-2 py-3 md:py-4 bg-transparent text-white border-2 border-white lg:text-base text-sm ">BOOK APPOINTMENT</motion.button>
               </Link>
             </div>
           </div>
         </section>
       </div>
       <Options />
-
       <section className="md:my-16 my-10 md:px-20 px-4 ">
         <div className="relative flex justify-between my-4">
           <div>
