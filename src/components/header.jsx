@@ -1,10 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import { Vollkorn, Poppins } from "next/font/google";
 
 const vollkorn = Vollkorn({ subsets: ["latin"] })
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"] },)
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
@@ -21,6 +22,7 @@ import { AuthContext } from "@/contexts/authContext";
 import { CartContext } from "@/contexts/cartContext";
 import { useRouter } from "next/navigation";
 import { toast } from 'sonner';
+import { auth } from "@/firebase.config";
 
 import { Button } from "@/components/ui/button"
 import {
@@ -77,7 +79,8 @@ const liVariant = {
 }
 
 const Header = () => {
-    const { user, logOut, userToken } = useContext(AuthContext)
+    const { user, logOut, userToken, currentUser } = useContext(AuthContext)
+    console.log(currentUser)
     const [nav, setNav] = useState(false)
     const pathname = usePathname()
     const [subNav, setSubNav] = useState(false)
@@ -149,8 +152,10 @@ const Header = () => {
                         </div>
                     </Link>
                 }
-                <div>
-                    <FaUser className="cursor-pointer" color="#000" onClick={() => profile()} size={20} />
+                <div className="flex items-center gap-2">
+                    {/* <FaUser className="cursor-pointer" color="#000" onClick={() => profile()} size={20} /> */}
+                    <img src={currentUser?.photoURL} className="w-9 aspect-square rounded-full" alt="" />
+                    {currentUser?.uid === "ojIdM00XIRNKBZs848B0cMo8qMu2" && <Link className="font-semibold" href="/dashboard">Admin</Link>}
                 </div>
                 {(userToken) &&
                 <div> 
@@ -180,8 +185,9 @@ const Header = () => {
                                     <span className="w-6 aspect-square flex justify-center items-center bg-white text-black absolute left-0 top-0 rounded-full">{cartItem.length}</span>
                                 </div>
                             </Link>
-                            <div>
+                            <div className="flex items-center gap-2">
                                 <FaUser className="cursor-pointer" color="#fff" onClick={() => profile()} size={20} />
+                                {currentUser?.uid === "ojIdM00XIRNKBZs848B0cMo8qMu2" && <Link className="font-semibold" href="/dashboard">Admin</Link>}
                             </div>
                         </motion.li>
                         <motion.li onClick={() => openSubNav()} variants={liVariant}><span className="relative px-3 flex items-center gap-1">Shop<FaChevronDown /></span>

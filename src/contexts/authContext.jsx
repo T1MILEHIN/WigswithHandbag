@@ -11,9 +11,9 @@ export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const router = useRouter();
   const [user, setUser] = useState(); // Initial empty state
+  const [currentUser, setCurrentUser] = useState(null)
   const [userToken, setUserToken] = useState(); // Initial empty state
   const [loading, setLoading] = useState(false); // Optional for SSR
-  const [isAuthenticated, setIsAuthenticated] = useState()
 
   // Fetch data from localStorage on component mount (optional for SSR)
   useEffect(() => {
@@ -21,17 +21,21 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         setUser(user);
         setUserToken(user.accessToken);
-        setIsAuthenticated(true);
+        setCurrentUser(auth?.currentUser)
+        localStorage.setItem("token", JSON.stringify(user.accessToken));
+        localStorage.setItem("user", JSON.stringify(user));
       } else {
         setUser(null);
         setUserToken(null);
-        setIsAuthenticated(false);
+        setCurrentUser(null)
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
       }
       setLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
+
   useEffect(() => {
     if (localStorage) {
       try {
@@ -99,8 +103,7 @@ export const AuthProvider = ({ children }) => {
         setUserToken,
         googlePopUp,
         logOut,
-        isAuthenticated,
-        setIsAuthenticated
+        currentUser
       }}
     >
       <Toaster position="top-center" />

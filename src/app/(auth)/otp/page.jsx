@@ -19,7 +19,7 @@ const page = () => {
                     <OtpInputControl />
                 </div>
                 <button type="submit" className="my-6 w-full rounded-sm text-white bg-black hover:text-BLUE border-2 hover:bg-transparent border-BLUE duration-300 bg-BLUE py-2 font-semibold text-base md:text-xl">Verify</button>
-                <p className="text-sm md:text-base mt-4 font-semibold ">Didn&apos;t receive code? <a className='text-BLUE font-bold underline' href="">Resend</a></p>
+                <p className="text-sm md:text-base mt-4 font-semibold ">Didn&apos;t receive code? <span className='text-BLUE font-bold underline'>Resend</span></p>
             </div>
 
         </section>

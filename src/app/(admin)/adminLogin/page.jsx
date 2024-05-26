@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, {useContext} from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import { FaXmark } from "react-icons/fa6";
@@ -10,8 +10,10 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { toast } from 'sonner';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { AuthContext } from '@/contexts/authContext';
 
 const Page = () => {
+    const { setLoading } = useContext(AuthContext)
     const router = useRouter()
     const schema = yup.object().shape({
         email: yup.string().email("Invalid email address").required("Email is required"),
@@ -22,12 +24,14 @@ const Page = () => {
         resolver: yupResolver(schema),
     });
     const adminLogIn = (data)=> {
-        console.log(data);
-        if (data.email === "tunmisebabade@gmail.com") {
+        setLoading(true)
+        if (data.email === "tunmisebabade@gmail.com" && data.password === "admin") {
             toast.success("Welcome Admin!!")
+            setLoading(false)
             router.push("/dashboard")
         }else {
             toast.error('Invalid Admin details')
+            setLoading(false)
         }
     }
 
