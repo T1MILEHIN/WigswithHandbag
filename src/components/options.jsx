@@ -72,7 +72,7 @@ const Options = () => {
                 speed={10}
                 className='overflow-hidden'
             >
-                <div className="md:py-10 shadow-md p-3 md:p-6 w-fit mx-auto overflow-hidden bg-white">
+                <div className="md:py-4 shadow-md p-3 md:p-6 w-fit mx-auto overflow-hidden bg-white">
                     <div className="flex justify-center items-center gap-3 md:gap-10">
                         <motion.button whileTap={{scale: 1.05}} onClick={() => setGlam(false)} className={`px-4 md:px-6 py-4 ${!glam && "bg-black text-white"} `}>Bridal MakeUp</motion.button>
                         <motion.button whileTap={{scale: 1.05}} onClick={() => setGlam(true)} className={`px-4 md:px-6 py-4 text-black ${glam && "bg-black text-white"}`}>Soft Glam</motion.button>
