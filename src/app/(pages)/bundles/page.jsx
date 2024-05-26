@@ -78,10 +78,10 @@ const Page = () => {
                 {(!allBundles && !loadingBundles)  ? <h1 className='col-span-1 md:col-span-3 text-center'>No Available Bundle Right Now. Check Back Later</h1> : (
                     allBundles.map((bundle, index) => (
                         <div key={index} className="rounded-xl cursor-pointer">
-                            <div  className="relative group overflow-hidden duration-300">
-                                <div className="rounded-xl relative overflow-hidden duration-300">
-                                    <div className="rounded-xl z-10 absolute top-0 bottom-2 left-0 right-0 bg-black bg-opacity-60"></div>
-                                    <LazyLoadImage effect="blur" src={bundle.image} alt={bundle.name} className="w-full aspect-square rounded-xl object-cover" />
+                            <div  className="relative group overflow-hidden duration-300 rounded-xl">
+                                <div className="group-hover:scale-125 rounded-xl relative overflow-hidden duration-300 h-[380px]">
+                                    <div className="rounded-xl z-10 absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-60"></div>
+                                    <LazyLoadImage effect="blur" src={bundle.image} alt={bundle.name} className="w-screen aspect-square rounded-xl object-cover" />
                                 </div>
                                 <div className={`${philosopher.className} z-20 absolute top-4 left-4 text-[#c9bcac] font-medium`}>
                                     <h2 className='font-semibold text-xl'>{bundle.name}</h2>
@@ -96,12 +96,12 @@ const Page = () => {
                                         <p className='font-bold text-sm'>${(bundle.price) * quantity.find((item) => item.id === bundle.id)?.quantity || 0}</p>
                                     </div>
                                 </div>
-                                <motion.div onClick={()=> addToCart(quantity.filter((item)=> item.quantity !== 0).find((item)=> item.id === bundle.id), setQuantity)} whileHover={{rotate: 20}} whileTap={{scale: 0.95}} className="duration-300 invisible opacity-0 -right-32 rounded-full z-20 absolute lg:group-hover:visible lg:group-hover:-right-2 lg:group-hover:opacity-100 bottom-0 border-[10px] border-[#c9bcac] bg-transparent">
+                                <motion.div onClick={()=> addToCart(quantity.filter((item)=> item.quantity !== 0).find((item)=> item.id === bundle.id), setQuantity)} whileHover={{rotate: 20}} whileTap={{scale: 0.95}} className="duration-300 invisible opacity-0 -right-32 rounded-full z-20 absolute lg:group-hover:visible lg:group-hover:-right-2 lg:group-hover:opacity-100 -bottom-2 border-[10px] border-[#c9bcac] bg-transparent">
                                     <FaCartPlus size={40} className="bg-[#c9bcac]" />
                                 </motion.div>
                             </div>
-                            <div className="lg:hidden block">
-                                <motion.button onClick={() => addToCart(quantity.filter((item)=> item.quantity !== 0).find((item)=> item.id === bundle.id), setQuantity)} whileTap={{ scale: 0.8 }} className={`${poppins.className} w-full bg-white text-black px-3 py-2 rounded-sm duration-300 font-medium`}>ADD TO CART</motion.button>
+                            <div className="lg:hidden block mt-2">
+                                <motion.button onClick={() => addToCart(quantity.filter((item)=> item.quantity !== 0).find((item)=> item.id === bundle.id), setQuantity)} whileTap={{ scale: 0.8 }} className={`${poppins.className} w-full bg-white text-black px-3 py-2 rounded-xl duration-300 font-medium`}>ADD TO CART</motion.button>
                             </div>
                         </div>
                     ))

@@ -81,7 +81,7 @@ const Page = () => {
         </div>
         <Slider />
       </section>
-      <div className="md:my-24">
+      <div className="md:my-24 my-12">
         <h1 className={`${poppins.className} font-bold text-2xl md:text-4xl mb-2`}>Top Picks For You</h1>
         <p className={`${vollkorn.className} text-base md:text-lg`}>Shop our range of products and embrace your unique radianc</p>
       </div>
@@ -89,11 +89,11 @@ const Page = () => {
         {loadingWigs && <div className="lg:col-span-3 md:col-span-2 col-span-1"><Loading /></div>}
         {(!loadingWigs && allWigs) &&
           allWigs?.map((wig, index) => (
-            <div key={index} className="rounded-xl cursor-pointer">
-              <div className="relative group overflow-hidden duration-300">
-                <div className="rounded-xl relative overflow-hidden duration-300">
-                  <div className="rounded-xl z-10 absolute top-0 bottom-2 left-0 right-0 bg-black bg-opacity-60"></div>
-                  <LazyLoadImage effect="blur" src={wig.image} alt={wig.name} className="w-full aspect-square rounded-xl object-cover" />
+            <div key={index} className="w-full aspect-square rounded-xl cursor-pointer">
+              <div className="relative group overflow-hidden duration-300 rounded-xl">
+                <div className="group-hover:scale-125 rounded-xl relative overflow-hidden duration-300 h-[380px]">
+                  <div className="rounded-xl z-10 absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-60"></div>
+                  <LazyLoadImage effect="blur" src={wig.image} alt={wig.name} className="relative w-screen aspect-square rounded-xl object-cover" />
                 </div>
                 <div className={`${philosopher.className} z-20 absolute top-4 left-4 text-[#c9bcac] font-medium`}>
                   <h2 className='font-semibold text-xl'>{wig.name}</h2>
@@ -108,36 +108,14 @@ const Page = () => {
                     <p className='font-bold text-sm'>${(wig.price) * quantity.find((item) => item.id === wig.id)?.quantity || 0}</p>
                   </div>
                 </div>
-                <motion.div onClick={() => addToCart(quantity.filter((item) => item.quantity !== 0).find((item) => item.id === wig.id), setQuantity)} whileHover={{ rotate: 20 }} whileTap={{ scale: 0.95 }} className="duration-300 invisible opacity-0 -right-32 rounded-full z-20 absolute lg:group-hover:visible lg:group-hover:-right-2 lg:group-hover:opacity-100 bottom-0 border-[10px] border-[#c9bcac] bg-transparent">
+                <motion.div onClick={() => addToCart(quantity.filter((item) => item.quantity !== 0).find((item) => item.id === wig.id), setQuantity)} whileHover={{ rotate: 20 }} whileTap={{ scale: 0.95 }} className="duration-300 invisible opacity-0 -right-32 rounded-full z-20 absolute lg:group-hover:visible lg:group-hover:-right-2 lg:group-hover:opacity-100 -bottom-2 border-[10px] border-[#c9bcac] bg-transparent">
                   <FaCartPlus size={40} className="bg-[#c9bcac]" />
                 </motion.div>
               </div>
-              <div className="lg:hidden block">
-                <motion.button onClick={() => addToCart(quantity.filter((item) => item.quantity !== 0).find((item) => item.id === bundle.id), setQuantity)} whileTap={{ scale: 0.8 }} className={`${poppins.className} w-full bg-white text-black px-3 py-2 rounded-sm duration-300 font-medium`}>ADD TO CART</motion.button>
+              <div className="lg:hidden block mt-2">
+                <motion.button onClick={() => addToCart(quantity.filter((item) => item.quantity !== 0).find((item) => item.id === bundle.id), setQuantity)} whileTap={{ scale: 0.8 }} className={`${poppins.className} w-full bg-white text-black px-3 py-2 rounded-xl duration-300 font-medium`}>ADD TO CART</motion.button>
               </div>
             </div>
-            // <div key={index} className="w-full aspect-square lg:p-3 lg:hover:bg-white rounded-md duration-200">
-            //   <div className="relative group overflow-hidden rounded-md">
-            //     <LazyLoadImage effect="blur" src={wig.image} alt={wig.name} className="w-full aspect-square" />
-            //     <div className="rounded-md absolute top-0 bottom-2 left-0 right-0 bg-black bg-opacity-60 invisible opacity-0 group-hover:visible group-hover:opacity-100 duration-300 lg:flex hidden  justify-center items-center">
-            //       <motion.button onClick={() => addToCart(quantity.filter((item)=> item.quantity !== 0).find((item)=> item.id === wig.id), setQuantity)} whileTap={{ scale: 0.8 }} className={`${poppins.className} shadow-lg bg-white text-black px-3 py-2 rounded-sm -translate-y-20 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 duration-300 font-medium`}>ADD TO CART</motion.button>
-            //     </div>
-            //   </div>
-            //   <div className='py-2 flex items-center justify-between'>
-            //     <div className="flex flex-col gap-2">
-            //       <h2 className='font-semibold text-base'>{wig.name}</h2>
-            //       <p className='font-bold text-xs'>${wig.price}.00</p>
-            //     </div>
-            //     <div className={`flex items-center gap-2 md:text-2xl`}>
-            //       <motion.span onClick={()=> decrease(wig)} whileTap={{scale: 0.90}} className="font-bold cursor-pointer"><FaMinus /></motion.span>
-            //       <span className={poppins.className}>{quantity?.find((item)=> item.id === wig.id)?.quantity || 0}</span>
-            //       <motion.span onClick={()=> increase(wig)} whileTap={{scale: 0.90}} className="font-bold cursor-pointer"><FaPlus /></motion.span>
-            //     </div>
-            //   </div>
-            //   <div className="lg:hidden block">
-            //     <motion.button onClick={() => addToCart(quantity.filter((item)=> item.quantity !== 0).find((item)=> item.id === wig.id), setQuantity)} whileTap={{ scale: 0.8 }} className={`${poppins.className} w-full bg-white text-black px-3 py-2 rounded-sm duration-300 font-medium`}>ADD TO CART</motion.button>
-            //   </div>
-            // </div>
           ))}
       </section>
     </div>
