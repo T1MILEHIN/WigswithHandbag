@@ -1,4 +1,4 @@
-import "./globals.css"
+// import "./globals.css"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import Landing from "@/components/landing"
